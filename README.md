@@ -1,3 +1,3 @@
-##Hi Hi nenes
-# Numerico
+# Hi Hi nenes
+## Repo de Numerico
 Repositorio de Numérico
