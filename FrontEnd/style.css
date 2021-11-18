@@ -1,0 +1,32 @@
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #dedede;
+}
+
+.space-top {
+  padding-top: 10px;
+}
+
+#joystick {
+  height: 200px;
+  width: 200px;
+  border-radius: 300px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  font: 24px/300px Helvetica, Arial, sans-serif;
+  cursor: all-scroll;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: -100;
+}
+
+.noselect {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+/*# sourceMappingURL=style.css.map */

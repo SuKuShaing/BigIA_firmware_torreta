@@ -1,0 +1,25 @@
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #dedede;
+  }
+  
+  .space-top {
+    padding-top: 10px;
+  }
+  
+  #joystick {
+    height: 200px;
+    width: 200px;
+    border-radius: 300px;
+    text-align: center;
+    background-color: rgba($color: #ffffff, $alpha: 0.5);
+    font: 24px/300px Helvetica, Arial, sans-serif;
+    cursor: all-scroll;
+    user-select: none;
+    z-index: -100;
+  }
+  
+  .noselect {
+    user-select: none;
+  }
