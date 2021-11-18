@@ -12,8 +12,8 @@ function init() {
     var vertical = new createjs.Shape();
     var horizontal = new createjs.Shape();
     //Lineas para establecer el centro del Joystick
-    // vertical.graphics.beginFill('#ff4d4d').drawRect(150, 0, 2, 300);
-    // horizontal.graphics.beginFill('#ff4d4d').drawRect(0, 150, 300, 2);
+    vertical.graphics.beginFill('#ff4d4d').drawRect(150, 0, 2, 300);
+    horizontal.graphics.beginFill('#ff4d4d').drawRect(0, 150, 300, 2);
   
     stage.addChild(psp);
     stage.addChild(vertical);
@@ -24,8 +24,8 @@ function init() {
   
     var myElement = $('#joystick')[0];
   
-    // create a simple instance
-    // by default, it only adds horizontal recognizers
+    // crea una instancia simple de la librería Hammer
+    // por defecto, solo agrega reconocedores horizontales
     var mc = new Hammer(myElement);
   
     mc.on("panstart", function(ev) {
@@ -37,12 +37,13 @@ function init() {
       stage.update();
     });
     
-    // listen to events...
+    // Escucha los tactos de los dedo o del mouse
     mc.on("panmove", function(ev) {
       var pos = $('#joystick').position();
   
       var x = (ev.center.x - pos.left - 150);
       var y = (ev.center.y - pos.top - 150);
+      //Esto envía el texto al HTML
       $('#xVal').text('X: ' + x);
       $('#yVal').text('Y: ' + (-1 * y));
       

@@ -1,25 +1,69 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  scroll-behavior:smooth;
+  /* para que al hacer scroll lo haga de manera suave */
+  
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1,6rem;
+  }
+}
+  
 body {
     height: 100%;
     width: 100%;
     background-color: #dedede;
-  }
+}
   
-  .space-top {
-    padding-top: 10px;
-  }
+//   .space-top {
+//     padding-top: 10px;
+//   }
   
-  #joystick {
-    height: 200px;
-    width: 200px;
-    border-radius: 300px;
-    text-align: center;
-    background-color: rgba($color: #ffffff, $alpha: 0.5);
-    font: 24px/300px Helvetica, Arial, sans-serif;
-    cursor: all-scroll;
-    user-select: none;
-    z-index: -100;
-  }
-  
-  .noselect {
-    user-select: none;
-  }
+.container {
+  height: 100vh;
+
+  display: flex;
+  flex-direction:column;
+  // background-color: blue;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p {
+  font-size: 3rem;
+}
+
+#joystick {
+  height: 200px;
+  width: 200px;
+  border-radius: 300px;
+  text-align: center;
+  background-color: rgba($color: #ffffff, $alpha: 0.5);
+  // font: 24px/300px Helvetica, Arial, sans-serif;
+  cursor: all-scroll;
+  user-select: none;
+  z-index: -100;
+}
+
+.textos {
+  width: 20vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+//para que el usuario no pueda tomar algo
+.noselect {
+  user-select: none;
+}

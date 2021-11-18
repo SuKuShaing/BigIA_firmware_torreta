@@ -1,11 +1,54 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  scroll-behavior: smooth;
+  /* para que al hacer scroll lo haga de manera suave */
+}
+
+html h1 {
+  font-size: 4rem;
+}
+
+html h2 {
+  font-size: 2rem;
+}
+
+html p {
+  font-size: 1,6rem;
+}
+
 body {
   height: 100%;
   width: 100%;
   background-color: #dedede;
 }
 
-.space-top {
-  padding-top: 10px;
+.container {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+p {
+  font-size: 3rem;
 }
 
 #joystick {
@@ -14,13 +57,21 @@ body {
   border-radius: 300px;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
-  font: 24px/300px Helvetica, Arial, sans-serif;
   cursor: all-scroll;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   z-index: -100;
+}
+
+.textos {
+  width: 20vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .noselect {
