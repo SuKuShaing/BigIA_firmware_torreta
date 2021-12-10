@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./style.css">
     <title>Vista de ataque</title>
 </head>
-<body class="noselect" onload="init()">
+<body id="bod" class="noselect" onload="init()">
     <div class="container">
         <h1 class="center titulo">Joystick de ataque</h1>
         <div class="display">
@@ -19,7 +19,7 @@
                 <p id="yVal" class="light">Y: </p>
             </div>  
             <div class="btn-ataque">
-                <button>Fire</button>
+                <button onclick="moverFondo()">Fire</button>
             </div>
         </div>
     </div>

@@ -1,3 +1,9 @@
+:root {
+  --Posicion-X: 1024px;
+  --Posicion-Y: 768px;
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,7 +30,14 @@ html {
 body {
     height: 100%;
     width: 100%;
-    background-color: #dedede;
+    background-image: url("./assets/People1464557.jpg");
+    background-size: auto;
+    background-position: var(--Posicion-X) var(--Posicion-Y);
+    // background-position-x: --Posicion-X;
+    // background-position-y: --Posicion-Y;
+    // background-repeat: no-repeat; Se desactiva para que se repita, cosa de que si se sale de los margenes la img se repita
+    //  background-attachment: fixed; //para que la img no haga scroll 
+
 }
 
 //para que el usuario no pueda tomar algo
@@ -40,8 +53,12 @@ body {
   justify-content: space-between;
   align-items: center;
 
+  background:  linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(102,102,102,0) 40%, rgba(255,255,255,0.77) 100%);
+
   .titulo {
     text-align: center;
+    color: black;
+    background-color: rgba($color: #ffffff, $alpha: 0.5);
   }
 
   .display {
@@ -74,7 +91,7 @@ body {
         border-left: 3px solid rgba($color: orange, $alpha: 0.1);
         // border-color: rgba($color: orange, $alpha: 0.5);
         border-radius: 100px;
-        background-color: rgba($color: red, $alpha: 0.6);
+        background-color: rgba($color: red, $alpha: 0.8);
         font-size: 2rem;
         font-weight: 700;
         transition-duration: 0.15s;
@@ -152,14 +169,6 @@ body {
 //////////////////////////////////////////////////////////////////////////////////
 
 @media (orientation: portrait) {
-  body {
-    background-color: palegreen;
-  }
-
-  #joystick {
-    width: 35vw;
-    height: calc(35vw);
-  }
 
   .container {
     .display {
@@ -180,17 +189,15 @@ body {
       }
     }
   }
+
+  #joystick {
+    width: 35vw;
+    height: calc(35vw);
+  }
+
 }
 
 @media (orientation: landscape) {
-  body {
-    background-color: palevioletred;
-  }
-  
-  #joystick {
-    height: 35vh;
-    width: calc(35vh);
-  }
 
   .container {
     .display {
@@ -212,5 +219,11 @@ body {
         }    
       }
     }
+  }
+
+  
+  #joystick {
+    height: 35vh;
+    width: calc(35vh);
   }
 }

@@ -1,13 +1,57 @@
+var teclas = {
+  UP: 38,
+  DOWN: 40,
+  LEFT: 37,
+  RIGHT: 39
+}
+
+document.addEventListener("keydown", moverFondoTeclado); //keydown detecta una tecla presionada, keyup cuando se suelta una tecla
+
+var posX = 1024;
+var posY = 768;
+
+var bbb = document.getElementById('bod'); //trae el elemento a modificar el CSS
+
+function moverFondoTeclado(evento) {
+  // console.log(bbb.style.backgroundPosition) => ESTO NO MUESTRA NADA
+  
+  //Esto hace que mueva con el teclado
+  switch(evento.keyCode){
+    case teclas.DOWN:
+      posY += 2;  
+      console.log("Pa' abajo weeeyyy");
+    break;
+    case teclas.UP: 
+      posY -= 2;  
+      console.log("Pa' arriba");
+    break;
+    case teclas.RIGHT:
+      posX += 2;
+      console.log("Pa' derecha");
+    break;
+    case teclas.LEFT:
+      posX -= 2;
+      console.log("Pa' izquierda");
+    break;
+    default:
+      console.log("Otra tecla");
+    break
+  }
+  
+  //Esto graba la posición en el fondo CSS
+  bbb.style.backgroundPosition = posX + "px " + posY +"px";
+}
+
 function init() {
-    // Damos la posición al Joystick
-    var xCenter = 150;
-    var yCenter = 150;
-    var stage = new createjs.Stage('joystick');
+  // Damos la posición al Joystick
+  var xCenter = 150;
+  var yCenter = 150;
+  var stage = new createjs.Stage('joystick');
   
     var psp = new createjs.Shape();
     psp.graphics.beginFill('#333333').drawCircle(xCenter, yCenter, 50);
   
-    psp.alpha = 0.25;
+    psp.alpha = 0.8;
   
     var vertical = new createjs.Shape();
     var horizontal = new createjs.Shape();
@@ -44,6 +88,13 @@ function init() {
   
       var x = (ev.center.x - pos.left - 150);
       var y = (ev.center.y - pos.top - 150);
+
+      // console.log("X: " + x + ", Y: " + y);
+      // if (Math.abs(x) > 2)
+      // posY -= 2; 
+      // posX += 2;
+      // bbb.style.backgroundPosition = posX + "px " + posY +"px";
+      
       //Esto envía el texto al HTML
       $('#xVal').text('X: ' + x);
       $('#yVal').text('Y: ' + (-1 * y));
@@ -52,7 +103,10 @@ function init() {
       
       psp.x = coords.x;
       psp.y = coords.y;
-  
+      
+      console.log("Coords.X: " + psp.x + ", Coords.Y: " + psp.y);
+      //Seba usar las coordenadas para mover la mira 
+
       psp.alpha = 0.5;
       
       stage.update();
