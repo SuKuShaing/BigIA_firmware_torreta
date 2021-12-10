@@ -11,6 +11,7 @@ function init() {
   
     var vertical = new createjs.Shape();
     var horizontal = new createjs.Shape();
+    
     //Lineas para establecer el centro del Joystick
     vertical.graphics.beginFill('#ff4d4d').drawRect(150, 0, 2, 300);
     horizontal.graphics.beginFill('#ff4d4d').drawRect(0, 150, 300, 2);
@@ -72,4 +73,4 @@ function calculateCoords(angle, distance) {
     coords.y = distance * Math.sin(rads);
     
     return coords;
-}   
+}

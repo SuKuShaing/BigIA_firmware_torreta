@@ -30,6 +30,13 @@ body {
   background-color: #dedede;
 }
 
+.noselect {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .container {
   height: 100vh;
   display: -webkit-box;
@@ -47,15 +54,113 @@ body {
           align-items: center;
 }
 
-p {
+.container .titulo {
+  text-align: center;
+}
+
+.container .display {
+  width: 100%;
+  padding: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.container .display .textos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.container .display .textos p {
   font-size: 3rem;
 }
 
+.container .display .btn-ataque button {
+  height: 30vh;
+  width: calc(30vh);
+  border: none;
+  border-top: 3px solid rgba(255, 165, 0, 0.1);
+  border-right: 3px solid rgba(255, 165, 0, 0.1);
+  border-bottom: 3px solid rgba(255, 165, 0, 0.1);
+  border-left: 3px solid rgba(255, 165, 0, 0.1);
+  border-radius: 100px;
+  background-color: rgba(255, 0, 0, 0.6);
+  font-size: 2rem;
+  font-weight: 700;
+  -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s;
+}
+
+.container .display .btn-ataque button:active {
+  -webkit-box-shadow: 0px 0px 47px -11px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 47px -11px rgba(0, 0, 0, 0.7);
+}
+
+.container .display .btn-ataque button:visited {
+  -webkit-animation-name: Recarga;
+          animation-name: Recarga;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+}
+
+.container .display .btn-ataque button:active:after {
+  -webkit-transition: 0s;
+  transition: 0s;
+}
+
+@-webkit-keyframes Recarga {
+  0% {
+  }
+  25% {
+    border-top: 3px solid rgba(255, 165, 0, 0.9);
+  }
+  50% {
+    border-right: 3px solid rgba(255, 165, 0, 0.9);
+  }
+  75% {
+    border-bottom: 3px solid rgba(255, 165, 0, 0.9);
+  }
+  100% {
+    border-left: 3px solid rgba(255, 165, 0, 0.9);
+  }
+}
+
+@keyframes Recarga {
+  0% {
+  }
+  25% {
+    border-top: 3px solid rgba(255, 165, 0, 0.9);
+  }
+  50% {
+    border-right: 3px solid rgba(255, 165, 0, 0.9);
+  }
+  75% {
+    border-bottom: 3px solid rgba(255, 165, 0, 0.9);
+  }
+  100% {
+    border-left: 3px solid rgba(255, 165, 0, 0.9);
+  }
+}
+
 #joystick {
-  height: 200px;
-  width: 200px;
+  height: 35vh;
+  width: calc(35vh);
   border-radius: 300px;
-  text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
   cursor: all-scroll;
   -webkit-user-select: none;
@@ -65,19 +170,55 @@ p {
   z-index: -100;
 }
 
-.textos {
-  width: 20vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+@media (orientation: portrait) {
+  body {
+    background-color: palegreen;
+  }
+  #joystick {
+    width: 35vw;
+    height: calc(35vw);
+  }
+  .container .display .btn-ataque button {
+    width: 25vw;
+    height: calc(25vw);
+  }
+  .container .display .textos {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .container .display .textos p {
+    font-size: 1.5rem;
+  }
 }
 
-.noselect {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+@media (orientation: landscape) {
+  body {
+    background-color: palevioletred;
+  }
+  #joystick {
+    height: 35vh;
+    width: calc(35vh);
+  }
+  .container .display .btn-ataque button {
+    height: 30vh;
+    width: calc(30vh);
+  }
+  .container .display .textos {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .container .display .textos p {
+    font-size: 3rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */

@@ -26,44 +26,191 @@ body {
     width: 100%;
     background-color: #dedede;
 }
-  
-//   .space-top {
-//     padding-top: 10px;
-//   }
+
+//para que el usuario no pueda tomar algo
+.noselect {
+  user-select: none;
+}
   
 .container {
   height: 100vh;
 
   display: flex;
   flex-direction:column;
-  // background-color: blue;
   justify-content: space-between;
   align-items: center;
-}
 
-p {
-  font-size: 3rem;
+  .titulo {
+    text-align: center;
+  }
+
+  .display {
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .textos {
+      // width: 20vw;
+      display: flex;
+      align-self: flex-end;
+      justify-content: space-around;
+
+      p {
+        font-size: 3rem;
+      }    
+    }
+
+    .btn-ataque {
+      button {
+        height: 30vh;
+        width: calc(30vh);
+        border: none;
+        border-top: 3px solid rgba($color: orange, $alpha: 0.1);
+        border-right: 3px solid rgba($color: orange, $alpha: 0.1);
+        border-bottom: 3px solid rgba($color: orange, $alpha: 0.1);
+        border-left: 3px solid rgba($color: orange, $alpha: 0.1);
+        // border-color: rgba($color: orange, $alpha: 0.5);
+        border-radius: 100px;
+        background-color: rgba($color: red, $alpha: 0.6);
+        font-size: 2rem;
+        font-weight: 700;
+        transition-duration: 0.15s;
+      }
+
+      button:hover {
+        // border-color: rgba($color: orange, $alpha: 0.7);
+        // background-color: rgba($color: red, $alpha: 0.7); 
+      }
+         
+      button:active {
+        // background-color: #3e8e41;
+        // box-shadow: 0 5px #666;
+        // transform: translateY(4px);
+        // outline: 2px solid black;
+        box-shadow: 0px 0px 47px -11px rgba(0,0,0,0.7);
+      }
+      
+      button:visited {
+        
+        animation-name: Recarga;
+        animation-duration: 2s;
+        // transition: all 2s        
+      }
+      
+      button:after {
+      }
+      
+      button:active:after {
+        transition: 0s        
+
+      }
+
+      @keyframes Recarga {
+        0% {
+          // border-top: 3px solid rgba($color: orange, $alpha: 0.5);
+          // border-right: 3px solid rgba($color: orange, $alpha: 0.5);
+          // border-bottom: 3px solid rgba($color: orange, $alpha: 0.5);
+          // border-left: 3px solid rgba($color: orange, $alpha: 0.5);  
+          
+        }
+        
+        25% {
+          border-top: 3px solid rgba($color: orange, $alpha: 0.9);
+        }
+        
+        50% {
+          border-right: 3px solid rgba($color: orange, $alpha: 0.9);
+        }
+        
+        75% {
+          border-bottom: 3px solid rgba($color: orange, $alpha: 0.9);
+        }
+        
+        100% {
+          border-left: 3px solid rgba($color: orange, $alpha: 0.9);
+        }
+      }
+    }
+  }
 }
 
 #joystick {
-  height: 200px;
-  width: 200px;
+  height: 35vh;
+  width: calc(35vh);
   border-radius: 300px;
-  text-align: center;
   background-color: rgba($color: #ffffff, $alpha: 0.5);
-  // font: 24px/300px Helvetica, Arial, sans-serif;
   cursor: all-scroll;
   user-select: none;
   z-index: -100;
 }
 
-.textos {
-  width: 20vw;
-  display: flex;
-  justify-content: space-around;
+//////////////////////////////////////////////////////////////////////////////////
+/////////////// Media Queri //////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+@media (orientation: portrait) {
+  body {
+    background-color: palegreen;
+  }
+
+  #joystick {
+    width: 35vw;
+    height: calc(35vw);
+  }
+
+  .container {
+    .display {
+      .btn-ataque {
+        button {
+          width: 25vw;
+          height: calc(25vw);
+        }
+      }
+
+      .textos {
+        display: flex;
+        flex-direction: column;
+
+        p {
+          font-size: 1.5rem;
+        }    
+      }
+    }
+  }
 }
 
-//para que el usuario no pueda tomar algo
-.noselect {
-  user-select: none;
+@media (orientation: landscape) {
+  body {
+    background-color: palevioletred;
+  }
+  
+  #joystick {
+    height: 35vh;
+    width: calc(35vh);
+  }
+
+  .container {
+    .display {
+      .btn-ataque {
+        button {
+          height: 30vh;
+          width: calc(30vh);
+        }
+      }
+
+      .textos {
+        // width: 20vw;
+        display: flex;
+        align-self: flex-end;
+        justify-content: space-around;
+  
+        p {
+          font-size: 3rem;
+        }    
+      }
+    }
+  }
 }
