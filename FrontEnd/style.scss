@@ -28,16 +28,15 @@ html {
 }
   
 body {
-    height: 100%;
-    width: 100%;
-    background-image: url("./assets/delincuente.jpg");
-    background-size: 300%;
-    background-position: var(--Posicion-X) var(--Posicion-Y);
-    // background-position-x: --Posicion-X;
-    // background-position-y: --Posicion-Y;
-    // background-repeat: no-repeat; Se desactiva para que se repita, cosa de que si se sale de los margenes la img se repita
-    //  background-attachment: fixed; //para que la img no haga scroll 
-
+  height: 100%;
+  width: 100%;
+  background-image: url("./assets/delincuente.jpg");
+  background-size: 300%;
+  background-position: var(--Posicion-X) var(--Posicion-Y);
+  // background-position-x: --Posicion-X;
+  // background-position-y: --Posicion-Y;
+  background-repeat: repeat; //Hace que se repita, cosa de que si se sale de los margenes la img se repita
+  //  background-attachment: fixed; //para que la img no haga scroll 
 }
 
 //para que el usuario no pueda tomar algo
@@ -90,7 +89,7 @@ body {
         border-bottom: 3px solid rgba($color: orange, $alpha: 0.1);
         border-left: 3px solid rgba($color: orange, $alpha: 0.1);
         // border-color: rgba($color: orange, $alpha: 0.5);
-        border-radius: 100px;
+        border-radius: 300px;
         background-color: rgba($color: red, $alpha: 0.8);
         font-size: 2rem;
         font-weight: 700;
@@ -101,7 +100,7 @@ body {
         // border-color: rgba($color: orange, $alpha: 0.7);
         // background-color: rgba($color: red, $alpha: 0.7); 
       // }
-         
+
       button:active {
         // background-color: #3e8e41;
         // box-shadow: 0 5px #666;
@@ -220,7 +219,6 @@ body {
       }
     }
   }
-
   
   #joystick {
     height: 35vh;
