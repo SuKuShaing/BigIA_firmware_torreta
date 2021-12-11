@@ -30,8 +30,8 @@ html {
 body {
     height: 100%;
     width: 100%;
-    background-image: url("./assets/People1464557.jpg");
-    background-size: auto;
+    background-image: url("./assets/delincuente.jpg");
+    background-size: 300%;
     background-position: var(--Posicion-X) var(--Posicion-Y);
     // background-position-x: --Posicion-X;
     // background-position-y: --Posicion-Y;
@@ -97,10 +97,10 @@ body {
         transition-duration: 0.15s;
       }
 
-      button:hover {
+      // button:hover {
         // border-color: rgba($color: orange, $alpha: 0.7);
         // background-color: rgba($color: red, $alpha: 0.7); 
-      }
+      // }
          
       button:active {
         // background-color: #3e8e41;
@@ -117,8 +117,8 @@ body {
         // transition: all 2s        
       }
       
-      button:after {
-      }
+      // button:after {
+      // }
       
       button:active:after {
         transition: 0s        

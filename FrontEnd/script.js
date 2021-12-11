@@ -18,19 +18,19 @@ function moverFondoTeclado(evento) {
   //Esto hace que mueva con el teclado
   switch(evento.keyCode){
     case teclas.DOWN:
-      posY += 2;  
+      posY -= 2;  
       console.log("Pa' abajo weeeyyy");
     break;
     case teclas.UP: 
-      posY -= 2;  
+      posY += 2;  
       console.log("Pa' arriba");
     break;
     case teclas.RIGHT:
-      posX += 2;
+      posX -= 2;
       console.log("Pa' derecha");
     break;
     case teclas.LEFT:
-      posX -= 2;
+      posX += 2;
       console.log("Pa' izquierda");
     break;
     default:
@@ -38,6 +38,15 @@ function moverFondoTeclado(evento) {
     break
   }
   
+  //Esto graba la posición en el fondo CSS
+  bbb.style.backgroundPosition = posX + "px " + posY +"px";
+}
+
+function moverFondo(coorX, coorY) {
+ 
+  posX -=  Math.floor(coorX/10);
+  posY -=  Math.floor(coorY/10);
+
   //Esto graba la posición en el fondo CSS
   bbb.style.backgroundPosition = posX + "px " + posY +"px";
 }
@@ -89,12 +98,6 @@ function init() {
       var x = (ev.center.x - pos.left - 150);
       var y = (ev.center.y - pos.top - 150);
 
-      // console.log("X: " + x + ", Y: " + y);
-      // if (Math.abs(x) > 2)
-      // posY -= 2; 
-      // posX += 2;
-      // bbb.style.backgroundPosition = posX + "px " + posY +"px";
-      
       //Esto envía el texto al HTML
       $('#xVal').text('X: ' + x);
       $('#yVal').text('Y: ' + (-1 * y));
@@ -104,8 +107,10 @@ function init() {
       psp.x = coords.x;
       psp.y = coords.y;
       
-      console.log("Coords.X: " + psp.x + ", Coords.Y: " + psp.y);
+      console.log("Coords.X: " + Math.floor(psp.x) + ", Coords.Y: " + Math.floor(psp.y));
       //Seba usar las coordenadas para mover la mira 
+
+      moverFondo(psp.x, psp.y);
 
       psp.alpha = 0.5;
       

@@ -32,8 +32,8 @@ html p {
 body {
   height: 100%;
   width: 100%;
-  background-image: url("./assets/People1464557.jpg");
-  background-size: auto;
+  background-image: url("./assets/delincuente.jpg");
+  background-size: 300%;
   background-position: var(--Posicion-X) var(--Posicion-Y);
 }
 
