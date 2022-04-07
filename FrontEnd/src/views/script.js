@@ -13,7 +13,7 @@ var posY = 768;
 
 var bbb = document.getElementById('bod'); //trae el elemento a modificar el CSS
 
-//Esto hace que se dibuje y funcion el Joystick
+//Esto hace que se dibuje y funcione el Joystick
 function init() {
 
   var xCenter = 150;// Damos la posición al Joystick
@@ -70,7 +70,7 @@ function init() {
     psp.x = coords.x;
     psp.y = coords.y;
     
-    console.log("Coords.X: " + Math.floor(psp.x) + ", Coords.Y: " + Math.floor(psp.y));
+    // console.log("Coords.X: " + Math.floor(psp.x) + ", Coords.Y: " + Math.floor(psp.y));
     //Seba usar las coordenadas para mover la mira 
 
     moverFondo(psp.x, psp.y);
@@ -92,28 +92,31 @@ function moverFondoTeclado(evento) {
   
   switch(evento.keyCode){
     case teclas.DOWN:
-      posY -= 2;  
+      posY -= 5;  
       console.log("Pa' abajo weeeyyy");
     break;
     case teclas.UP: 
-      posY += 2;  
+      posY += 5;  
       console.log("Pa' arriba");
     break;
     case teclas.RIGHT:
-      posX -= 2;
+      posX -= 5;
       console.log("Pa' derecha");
     break;
     case teclas.LEFT:
-      posX += 2;
+      posX += 5;
       console.log("Pa' izquierda");
     break;
     default:
       console.log("Otra tecla");
     break
   }
-          
-  //Esto graba la posición en el fondo CSS
-  bbb.style.backgroundPosition = posX + "px " + posY +"px";
+  
+  socket.emit('coordAlServidor', {
+    posX,
+    posY
+  })
+  // fondo(posX, posY);
 }
 
 //Esto hace que mueva el fondo con las ordenes de Joystick
@@ -122,7 +125,15 @@ function moverFondo(coorX, coorY) {
   posX -=  Math.floor(coorX/10);
   posY -=  Math.floor(coorY/10);
   
-  //Esto graba la posición en el fondo CSS
+  socket.emit('coordAlServidor', {
+    posX,
+    posY
+  })
+  // fondo(posX, posY);
+}
+
+//Esto graba la posición en el fondo CSS
+function fondo(posX, posY) {
   bbb.style.backgroundPosition = posX + "px " + posY +"px";
 }
 
@@ -137,3 +148,11 @@ function calculateCoords(angle, distance) {
     
     return coords;
 }
+
+//Comunicación con el servidor, web socket
+const socket = io();
+
+socket.on('coordDelServidor', (data) => {
+  fondo(data.posX, data.posY);
+  console.log(data);
+});

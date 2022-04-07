@@ -1,9 +1,10 @@
 const express = require('express');
-const app = express();
 const path = require('path'); //path coloca los "\" o "/" según sea windows o linux
+const app = express();
+
 
 // Settings
-app.set('port', 1313);
+app.set('port', process.env.PORT || 1313); //Usa el puesto que le da el servidor o el que yo asigne
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -18,6 +19,18 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, 'views'))); //con esté comando envío el resto de archivos que llamará index
 
 // listening the server
-app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
     console.log('server on port', app.get('port'));
+});
+
+//Web Socket
+const socketIO = require('socket.io');
+const io = socketIO(server);
+
+io.on('connection', (socket) => {
+    console.log('new connection', socket.id);
+
+    socket.on('coordAlServidor', (data) => {
+        io.sockets.emit('coordDelServidor', data);
+    });
 });
