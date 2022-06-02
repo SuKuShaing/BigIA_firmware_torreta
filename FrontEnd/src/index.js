@@ -1,3 +1,10 @@
+/* 
+Seba: para iniciar esto tienes que ir con la consolo hasta donde está el archivo
+index.js y a ese archivo debes darle en la consola "node index.js" para que se inicie el servidor
+y ahora pueda andar, ahora al ejecuar index.html, se podrá mover el fondo, puesto que
+el joystick envia el comando al servidor y éste lo regresa al html como un fondo corrido
+*/
+
 const express = require('express');
 const path = require('path'); //path coloca los "\" o "/" según sea windows o linux
 const app = express();
@@ -34,3 +41,31 @@ io.on('connection', (socket) => {
         io.sockets.emit('coordDelServidor', data);
     });
 });
+
+/*
+Información para el desarrollo, videos tutoriales
+
+HTML5, Nodejs, Express, WebSockets y Mongodb
+https://www.youtube.com/watch?v=s_Stz1KlSdo&list=RDCMUCX9NJ471o7Wie1DQe94RVIg&index=2
+
+información Socket.io
+https://youtu.be/0wqteZNqruc
+*/
+
+const spawn = require("child_process").spawn
+
+const pythonProcess = spawn("python", ["test.py"])
+
+let pythonResponse = ""
+
+pythonProcess.stdout.on("data", function(data) {
+    pythonResponse += data.toString()
+})
+
+pythonProcess.stdout.on("end", function() {
+    console.log(pythonResponse)
+})
+
+pythonProcess.stdin.write("Sebendi")
+
+pythonProcess.stdin.end()
