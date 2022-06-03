@@ -156,3 +156,9 @@ socket.on('coordDelServidor', (data) => {
   fondo(data.posX, data.posY);
   console.log(data);
 });
+
+function fuego(){
+  socket.emit('pyt')
+}
+
+

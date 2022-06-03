@@ -1,8 +1,8 @@
 /* 
-Seba: para iniciar esto tienes que ir con la consolo hasta donde está el archivo
+Seba: para iniciar esto tienes que ir con la consola hasta donde está el archivo
 index.js y a ese archivo debes darle en la consola "node index.js" para que se inicie el servidor
-y ahora pueda andar, ahora al ejecuar index.html, se podrá mover el fondo, puesto que
-el joystick envia el comando al servidor y éste lo regresa al html como un fondo corrido
+y ahora pueda andar, ahora al ejecutar index.html, se podrá mover el fondo, puesto que
+el joystick envía el comando al servidor y éste lo regresa al html como un fondo corrido
 */
 
 const express = require('express');
@@ -40,6 +40,11 @@ io.on('connection', (socket) => {
     socket.on('coordAlServidor', (data) => {
         io.sockets.emit('coordDelServidor', data);
     });
+
+    socket.on('pyt', () => {
+            aa = Math.trunc(Math.random()*1000);
+            fire(aa);
+    });
 });
 
 /*
@@ -52,20 +57,31 @@ información Socket.io
 https://youtu.be/0wqteZNqruc
 */
 
-const spawn = require("child_process").spawn
+///////////////// Ejecución del script de python /////////////////////////////
 
-const pythonProcess = spawn("python", ["test.py"])
+const spawn = require("child_process").spawn;
 
-let pythonResponse = ""
-
-pythonProcess.stdout.on("data", function(data) {
-    pythonResponse += data.toString()
-})
-
-pythonProcess.stdout.on("end", function() {
-    console.log(pythonResponse)
-})
-
-pythonProcess.stdin.write("Sebendi")
-
-pythonProcess.stdin.end()
+function fire (x1) {
+    obj = { Cosa: "ObjCosa", booleano: true, numero: x1 };
+    const pythonProcess = spawn("python", ["test.py", "otra entrada 1", 1234, x1, JSON.stringify(obj)]);
+    
+    let pythonResponse = "";
+    pythonProcess.stdout.on("data", function(data) {
+        pythonResponse += data.toString();
+    });
+    
+    pythonProcess.stdout.on("end", function() {
+        console.log(pythonResponse);
+    });
+    
+    pythonProcess.stderr.on("data",(data) => {
+        console.error("stderr: " + data);
+    });
+    
+    pythonProcess.on('close',(code) => {
+        console.log("child process exited with code: " + code);
+    });
+    
+    pythonProcess.stdin.write("Sebitax"); //enviamos datos al subproceso
+    pythonProcess.stdin.end(); //finalizamos el envío de datos
+}
