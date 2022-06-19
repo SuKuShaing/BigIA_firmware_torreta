@@ -10,11 +10,11 @@ pythonProcess.stdout.on("data", function(data) { //cada vez que el proceso graba
 });
 
 pythonProcess.stdout.on("end", function() { //con end detectamos el termino de envío de datos
-    console.log(pythonResponse);
+    // console.log(pythonResponse);
     
-    // objs = JSON.parse(pythonResponse) //para convertir un Json en objeto js
-    // console.log(objs); //para convertir un Json en objeto js
-    // console.log(objs["numero"]*3);
+    objs = JSON.parse(pythonResponse) //para convertir un Json en objeto js
+    console.log(objs); //para convertir un Json en objeto js
+    console.log(objs["numero"]*3);
 
     // console.log(pythonResponse.split("'")[5]*9); //.split("'") corta el string y lo convierte en array, y uno puede seleccionar un item del array y si es número multiplicarlo
     // console.log(pythonResponse*9); //si envía un número lo recibe como tal

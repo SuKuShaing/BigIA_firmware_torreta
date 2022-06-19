@@ -69,9 +69,13 @@ function fire (x1) {
     pythonProcess.stdout.on("data", function(data) {
         pythonResponse += data.toString();
     });
-    
+
     pythonProcess.stdout.on("end", function() {
-        console.log(pythonResponse);
+        // console.log(pythonResponse);
+        objs = JSON.parse(pythonResponse) //para convertir un Json en objeto js
+        console.log(objs); //para convertir un Json en objeto js
+        console.log(objs["numero"]*3);
+
     });
     
     pythonProcess.stderr.on("data",(data) => {

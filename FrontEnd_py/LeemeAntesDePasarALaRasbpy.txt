@@ -1,0 +1,4 @@
+librerias a instarlar despues de instarlar python
+
+- Flask 
+$ pip install Flask

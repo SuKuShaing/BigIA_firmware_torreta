@@ -13,14 +13,16 @@ nombre = sys.stdin.readline() #lee lo enviado por js y lo guardamos en una varia
 # print("str(sys.argv[2]): ", str(sys.argv[2]))
 # print("str(sys.argv[3]): ", str(sys.argv[3]))
 # print("str(sys.argv[4]): ", str(sys.argv[4]))
-print(str(sys.argv))
+# print(str(sys.argv))
+
 
 ############# Trabajar con JSON ################
-# obto_py = json.loads(str(sys.argv[4])) #con json.loads convertimos un Json en un objeto python 
-# obto_py['numero'] = obto_py['numero'] * 3
-# obto_py['booleano'] = False
-# # print(obto_py) #json.dumps convertimos un objeto python a Json
-# print(json.dumps(obto_py)) #json.dumps convertimos un objeto python a Json
+obto_py = json.loads(str(sys.argv[4])) #con json.loads convertimos un Json en un objeto python 
+obto_py['numero'] = obto_py['numero'] * 3
+obto_py['coorX'] = obto_py['numero'] * 3
+obto_py['booleano'] = False
+# print(obto_py) #json.dumps convertimos un objeto python a Json
+print(json.dumps(obto_py)) #json.dumps convertimos un objeto python a Json
 
 
 ############# ARRAYS ################
