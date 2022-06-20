@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 # Creating simple Routes 
 @app.route('/test')
@@ -13,8 +13,8 @@ def about_test():
 
 # Routes to Render Something
 @app.route('/')
-def home():
-    return render_template("home.html")
+def index():
+    return render_template("index.html")
 
 @app.route('/about', strict_slashes=False)
 def about():
@@ -22,4 +22,4 @@ def about():
 
 # Make sure this we are executing this file
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port = 1313, debug=True)  #La applicacion está en mododo de prueba, gracias a esta linea cada vez que cambio algo se reinicia el servidor
