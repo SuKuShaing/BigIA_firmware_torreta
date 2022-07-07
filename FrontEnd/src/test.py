@@ -1,5 +1,5 @@
 # from ast import operator
-import sys  #libreria que nos permite recibir info
+import sys #libreria que nos permite recibir info
 import json #para formatear los datos salientes
 # import ast #librería árbol de sintaxis abstracta
 
@@ -18,11 +18,19 @@ nombre = sys.stdin.readline() #lee lo enviado por js y lo guardamos en una varia
 
 ############# Trabajar con JSON ################
 obto_py = json.loads(str(sys.argv[4])) #con json.loads convertimos un Json en un objeto python 
-obto_py['numero'] = obto_py['numero'] * 3
-obto_py['coorX'] = obto_py['numero'] * 3
-obto_py['booleano'] = False
+
+#aquí iria el trabajo del Robin
+obto_py['Hidrogeno'] = obto_py['Hidrogeno'] * 9
+obto_py['Metano']
+obto_py['Acetileno'] = obto_py['Acetileno'] * 0.8
+obto_py['Etileno']
+obto_py['Etano'] = obto_py['Etano'] * 2.23
+# obto_py['booleano'] = False
 # print(obto_py) #json.dumps convertimos un objeto python a Json
+
+
 print(json.dumps(obto_py)) #json.dumps convertimos un objeto python a Json
+# print(json.dumps(Resultado_del_Robin)) #json.dumps convertimos un objeto python a Json
 
 
 ############# ARRAYS ################

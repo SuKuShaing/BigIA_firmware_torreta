@@ -62,7 +62,8 @@ https://youtu.be/0wqteZNqruc
 const spawn = require("child_process").spawn;
 
 function fire (x1) {
-    obj = { Cosa: "ObjCosa", booleano: true, numero: x1 };
+    // obj = { Cosa: "ObjCosa", booleano: true, numero: x1, Robin: 32, Seba: "OpenCree" };
+    obj = { Hidrogeno: 0.1, Metano: 2, Acetileno: 0.33, Etileno: 4, Etano: 5.5 };
     const pythonProcess = spawn("python", ["test.py", "otra entrada 1", 1234, x1, JSON.stringify(obj)]);
     
     let pythonResponse = "";
@@ -74,7 +75,7 @@ function fire (x1) {
         // console.log(pythonResponse);
         objs = JSON.parse(pythonResponse) //para convertir un Json en objeto js
         console.log(objs); //para convertir un Json en objeto js
-        console.log(objs["numero"]*3);
+        // console.log(objs["numero"]*3);
 
     });
     
