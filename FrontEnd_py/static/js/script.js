@@ -112,11 +112,11 @@ function moverFondoTeclado(evento) {
     break
   }
   
-  // socket.emit('coordAlServidor', {
-  //   posX,
-  //   posY
-  // })
-  fondo(posX, posY);
+  socket.emit('coordAlServidor', {
+    posX,
+    posY
+  })
+  // fondo(posX, posY);
 }
 
 //Esto hace que mueva el fondo con las ordenes de Joystick
@@ -125,11 +125,11 @@ function moverFondo(coorX, coorY) {
   posX -=  Math.floor(coorX/10);
   posY -=  Math.floor(coorY/10);
   
-  // socket.emit('coordAlServidor', {
-  //   posX,
-  //   posY
-  // })
-  fondo(posX, posY);
+  socket.emit('coordAlServidor', {
+    posX,
+    posY
+  })
+  // fondo(posX, posY);
 }
 
 //Esto graba la posición en el fondo CSS
@@ -151,14 +151,22 @@ function calculateCoords(angle, distance) {
 
 //Comunicación con el servidor, web socket
 const socket = io();
-
+    
 socket.on('coordDelServidor', (data) => {
   fondo(data.posX, data.posY);
   console.log(data);
 });
 
 function fuego(){
-  socket.emit('pyt')
-}
+  socket.emit('pyt');
+};
+socket.on('disparo', (data) => {
+  console.log(data);
+});
 
-
+socket.on('connect', function(){
+    console.log("Conectado bb")
+});
+socket.on('disconnect', function(){
+    console.log("Desconectado bb")
+});

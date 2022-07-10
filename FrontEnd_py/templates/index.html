@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- Esto le indica dónde está en el servidor ese archivo -->
     <title>Vista de ataque</title>
 </head>
 <body id="bod" class="noselect" onload="init()">
@@ -30,7 +30,8 @@
 <script src="https://code.createjs.com/createjs-2015.11.26.combined.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.css"></script> -->
 <!-- <script src="/socket.io/socket.io.js" charset="UTF-8"></script> -->
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script> <!-- conexión con socket de python -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script> <!-- Esto le indica dónde está en el servidor ese archivo -->
 <!-- <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script> -->
 </html>

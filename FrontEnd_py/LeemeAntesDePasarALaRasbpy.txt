@@ -1,4 +1,9 @@
 librerias a instarlar despues de instarlar python
 
 - Flask 
-$ pip install Flask
+$ pip install flask
+
+- Flask-socketio
+$ pip install flask-socketio
+
+sí al ejecutarlo, la consola envía un error, instalar los paquetes que el error diga
