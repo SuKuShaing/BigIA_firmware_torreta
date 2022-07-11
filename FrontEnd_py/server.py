@@ -23,8 +23,9 @@ def fondo(coord):
 @socketio.on('pyt')
 def fuego():
     print("Fire!")
-    #Aquí va a ir el comando que disparará
+    #MAURO Aquí va a ir el comando que disparará
     emit('disparo', "Disparo ejecutado") #emit es solo entre el usuario y el servidor, independiente de cuantos hay conectados
+
 
 
 if __name__ == '__main__':
