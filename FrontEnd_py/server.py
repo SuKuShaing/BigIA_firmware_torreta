@@ -1,15 +1,25 @@
-import json
 from flask import Flask, render_template  #render_template es para enviar html al navegador
 from flask_socketio import SocketIO, emit
+
+#Las siguientes 5 lineas permite ejecutar este server como si fuese raíz
+import os
+import sys
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+sys.path.append(PROJECT_ROOT)
+import backend.Python.torreta_v05_funcional as tf
+# from ...Numerico.backend.Python import torreta_v05_funcional as tf
+
 
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
+
 # Rutas URLS
 @app.route('/') #una ruta del objeto
 def index():    #definimos una fc
     return render_template("index.html")    #envía un string
+
 
 # @app.route('/about', strict_slashes=False)
 # def about():
@@ -28,6 +38,7 @@ def fondo(coord):
 @socketio.on('pyt')
 def fuego():
     print("Fire!")
+    tf.saludar() #ejecutar saludo
     #MAURO Aquí va a ir el comando que disparará
     emit('disparo', "Disparo ejecutado") #emit es solo entre el usuario y el servidor, independiente de cuantos hay conectados
 
