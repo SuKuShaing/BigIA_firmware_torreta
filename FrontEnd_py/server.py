@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template  #render_template es para enviar html al navegador
 from flask_socketio import SocketIO, emit
 
@@ -18,8 +19,12 @@ def index():    #definimos una fc
 # Para mas información sobre websocket ir a https://flask-socketio.readthedocs.io/en/latest/getting_started.html
 @socketio.on('coordAlServidor')
 def fondo(coord):
-    socketio.emit('coordDelServidor', coord) #socketio.emit es en Broadcasting o Radiodifusión es decir se envia a todos los clientes conectados
-
+    ##########################
+    # Coordenadas X e Y aquí #
+    ##########################
+    # print(coord['posX'])
+    # print(coord['posY'])
+    socketio.emit('coordDelServidor', coord) #socketio.emit es en Broadcasting o Radiodifusión es decir se envía a todos los clientes conectados
 @socketio.on('pyt')
 def fuego():
     print("Fire!")
@@ -30,4 +35,4 @@ def fuego():
 
 if __name__ == '__main__':
     app.run(port = 1313, debug=True, host="0.0.0.0")  #app.run se encarga de ejecuar el servidor, por defecto en el puerto 5000, y el host por defecto es 127.0.0.1, La applicacion está en mododo de prueba, gracias a esta linea cada vez que cambio algo se reinicia el servidor
-                                                      #los puertos 0 al 1024 están ocupados por el mismo pc, del 1025 al 65536 (2exp16)
+                                                        #los puertos 0 al 1024 están ocupados por el mismo pc, del 1025 al 65536 (2exp16)
