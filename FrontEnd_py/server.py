@@ -1,13 +1,13 @@
 from flask import Flask, render_template  #render_template es para enviar html al navegador
 from flask_socketio import SocketIO, emit
 
-#Las siguientes 5 lineas permite ejecutar este server como si fuese raíz
 import os
 import sys
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)) #permite ejecutar este server como si fuese raíz
 sys.path.append(PROJECT_ROOT)
-import backend.Python.torreta_v05_funcional as tf
-# from ...Numerico.backend.Python import torreta_v05_funcional as tf
+# import backend.Python.torreta_v05_funcional as tf
+#Más información sobre como importar bien en https://towardsdatascience.com/understanding-python-imports-init-py-and-pythonpath-once-and-for-all-4c5249ab6355
+import torr_v2_web as tf
 
 
 app = Flask(__name__, template_folder='templates')
@@ -38,7 +38,7 @@ def fondo(coord):
 @socketio.on('pyt')
 def fuego():
     print("Fire!")
-    tf.saludar() #ejecutar saludo
+    # tf.saludar() #ejecutar saludo
     #MAURO Aquí va a ir el comando que disparará
     emit('disparo', "Disparo ejecutado") #emit es solo entre el usuario y el servidor, independiente de cuantos hay conectados
 
