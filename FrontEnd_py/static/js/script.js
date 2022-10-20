@@ -1,9 +1,13 @@
 //Esto se ocupara para los movimientos desde el teclado
 var teclas = {
+  //Flechas
   UP: 38,
   DOWN: 40,
   LEFT: 37,
-  RIGHT: 39
+  RIGHT: 39,
+  DISPARAR: 68, //tecla D
+  INCREMENTO: 70, //tecla F
+  DECREMENTO: 83 //tecla S
 }
 document.addEventListener("keydown", moverFondoTeclado); //keydown detecta una tecla presionada, keyup cuando se suelta una tecla
 
@@ -54,14 +58,14 @@ function init() {
     stage.update();
   });
   
-  // Escucha los tactos de los dedo o del mouse
+  // Escucha los tactos de los dedo o del mouse que mueven el joystick
   mc.on("panmove", function(ev) {
     var pos = $('#joystick').position();
 
     var x = (ev.center.x - pos.left - 150);
     var y = (ev.center.y - pos.top - 150);
 
-    //Esto envía el texto al HTML
+    //Esto envía el texto de la coordenada al HTML
     $('#xVal').text('X: ' + Math.floor(x) + ' ');
     $('#yVal').text('Y: ' + (-1 * Math.floor(y)));
     
@@ -70,8 +74,12 @@ function init() {
     psp.x = coords.x;
     psp.y = coords.y;
     
+    // console.log(`var x: ${x}; var y: ${y}`);
     // console.log("Coords.X: " + Math.floor(psp.x) + ", Coords.Y: " + Math.floor(psp.y));
+    // console.log(`Coords.X: ${Math.floor(psp.x)}; Coords.Y: ${Math.floor(psp.y)}`);
     //Seba usar las coordenadas para mover la mira 
+    
+    moverTorreta(Math.floor(psp.x), Math.floor(psp.y));
 
     moverFondo(psp.x, psp.y);
 
@@ -93,22 +101,37 @@ function moverFondoTeclado(evento) {
   switch(evento.keyCode){
     case teclas.DOWN:
       posY -= 5;  
-      console.log("Pa' abajo weeeyyy");
+      moverTorreta(0, 1);
     break;
     case teclas.UP: 
       posY += 5;  
-      console.log("Pa' arriba");
+      moverTorreta(0, -1);
     break;
     case teclas.RIGHT:
       posX -= 5;
-      console.log("Pa' derecha");
+      moverTorreta(1, 0);
     break;
     case teclas.LEFT:
       posX += 5;
-      console.log("Pa' izquierda");
+      moverTorreta(-1, 0);
+    break;
+    case teclas.INCREMENTO:
+      //Incrementa la velocidad de movimiento de la torreta
+      socket.emit('aumentos', {
+        autm: 'Aumentar'
+      });
+    break;
+    case teclas.DECREMENTO:
+      //Disminuye la velocidad de movimiento de la torreta
+      socket.emit('aumentos', {
+        autm: 'Disminuir'
+      });
+    break;
+    case teclas.DISPARAR:
+      socket.emit('pyt');
     break;
     default:
-      console.log("Otra tecla");
+      console.log("Otra tecla: ", evento.keyCode);
     break
   }
   
@@ -137,7 +160,7 @@ function fondo(posX, posY) {
   bbb.style.backgroundPosition = posX + "px " + posY +"px";
 }
 
-//Esta funcion calcula las coordenadas del Joystick
+//Esta función calcula las coordenadas del Joystick
 function calculateCoords(angle, distance) {
     var coords = {};
     distance = Math.min(distance, 100);  
@@ -154,7 +177,7 @@ const socket = io();
     
 socket.on('coordDelServidor', (data) => {
   fondo(data.posX, data.posY);
-  console.log(data);
+  // console.log(data);
 });
 
 function fuego(){
@@ -163,6 +186,37 @@ function fuego(){
 socket.on('disparo', (data) => {
   console.log(data);
 });
+
+function moverTorreta(xx, yy){
+  if (xx > 0) {
+    //Para la derecha
+    socket.emit('mover_torreta', {
+      posX: 1,
+      posY: 0
+    });
+  } 
+  if (xx < 0) {
+    //Para la izquierda
+    socket.emit('mover_torreta', {
+      posX: -1,
+      posY: 0
+    });
+  }
+  if (yy < 0) {
+    //Para arriba
+    socket.emit('mover_torreta', {
+      posX: 0,
+      posY: 1
+    });
+  }
+  if (yy > 0) {
+    //Para abajo
+    socket.emit('mover_torreta', {
+      posX: 0,
+      posY: -1
+    });
+  }
+}
 
 socket.on('connect', function(){
     console.log("Conectado bb")
