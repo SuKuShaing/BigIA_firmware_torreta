@@ -1,12 +1,12 @@
 # Importar librerias
 import time
 from time import sleep
-import numpy as np
-import pygame
-from picamera import PiCamera
+# import numpy as np
+# import pygame
+# from picamera import PiCamera
 import RPi.GPIO as GPIO
-import threading as th
-from threading import Event
+# import threading as th
+# from threading import Event
 from tools_web import Stepper
 
 """
@@ -123,12 +123,12 @@ def laser():
     pass
 
 
-def apagar_camara():
-    camera.stop_preview()
-    camera.close()
+# def apagar_camara():
+    # camera.stop_preview()
+    # camera.close()
 
 
-
+"""
 def iniciar():
     EN_CURSO = True
     while EN_CURSO:
@@ -180,7 +180,7 @@ def iniciar():
 
     print("Cerrando programa ...")
     pygame.quit()
-
+"""
 
 if __name__ == '__main__':
     iniciar()

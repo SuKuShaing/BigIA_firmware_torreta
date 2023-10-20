@@ -1,0 +1,1 @@
+Qué bien que iba anular las dependencias de la cámara para que se pudiera compilar el requierements.txt
