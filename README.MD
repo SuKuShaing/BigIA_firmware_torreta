@@ -7,8 +7,8 @@ Se lleva a cabo el desarrollo de la torreta automatica de defensa
 Para solicitar permisos, avisar a Seba :D
 
 ## Crear y ejecutar un entorno virtual
-Siempre es importa trabajar dentro de un entorno, puesto que así evitamos que se contaminen las librerías que usamos en cada proyecto, con las librerías de otros proyectos.
-Seguir estos pasos en orden, el símbolo "$" indica que lo que sigue se debe pegar en la consola
+Siempre es importante trabajar dentro de un entorno, puesto que así evitamos que se contaminen las librerías que usamos en cada proyecto, con las librerías de otros proyectos.
+Seguir estos pasos en órden, el símbolo "$" indica que lo que sigue se debe pegar en la consola
 
 // se van a crear carpetas del entorno 
 // -m : modulo
