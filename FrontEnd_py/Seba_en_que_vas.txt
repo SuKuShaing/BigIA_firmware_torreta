@@ -1,1 +1,10 @@
-Qué bien que iba anular las dependencias de la cámara para que se pudiera compilar el requierements.txt
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::: Tareas Seba :::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+- Hacer los comandos para que el motor para y acelere
+-- Velocidad máxima de un nema 17 = 600 RPM (verificar esta información, algunas paginas dicen 600 RPM otras 2000 RPM)
+-- Pasos del motor = 200 pasos (esto varía segun el motor)
+-- 200*600 = 120000 pasos por vuelta por minuto 
+-- 120000/60 = 2000 pasos por segundo (velocidad maxima, este valor cambia sí las RPM maximas cambian y los pasos del motor)
+
+- Hacer el requierements.txt
