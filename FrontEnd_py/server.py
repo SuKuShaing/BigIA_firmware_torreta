@@ -53,7 +53,7 @@ def aumento(au):
     if au['autm'] == 'Aumentar':
         tf.aum_vel_mov()
     if au['autm'] == 'Disminuir':
-        tf.aum_vel_mov()
+        tf.dis_vel_mov()
 
 
 @socketio.on('pyt')
