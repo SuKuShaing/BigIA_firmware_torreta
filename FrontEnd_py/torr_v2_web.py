@@ -32,8 +32,8 @@ imágenes de la cámara en el navegador
 #######################################################
 
 # Incremento general de pasos, puede customizarse
-incremento = 100
-aumento_incremento = 50
+incremento = 10 # 10 pasos
+aumento_incremento = 5 
 
 # Pines
 DIR1 = 20    
