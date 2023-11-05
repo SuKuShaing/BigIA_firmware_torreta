@@ -11,7 +11,7 @@ class Stepper():
         self.angulo = None
         self.id = id
         self.ROT = 1  # default CW (sentido de giro por defecto, en el sentido de las agujas del reloj)
-        self.delay = 0.01  # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo minimo que el DVR8825 es de 1,9 ms
+        self.delay = 0.001  # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo minimo que el DVR8825 es de 1,9 ms
 
         # Configuración de los pines DIR (dirección) y STEP (paso) según el ID del motor
         if id == 1:
@@ -50,10 +50,11 @@ class Stepper():
                 self.ROT = 0
                 GPIO.output(self.DIR, 0)
 
-            for x in range(pasos):
+            for paso in range(pasos):
                 # Aplicar un perfil de aceleración
-                acceleration_factor = x / pasos  # Ajuste de aceleración gradual
-                current_delay = initial_delay + (final_delay - initial_delay) * acceleration_factor
+                acceleration_factor = paso / pasos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
+                current_delay = initial_delay + (final_delay - initial_delay) * acceleration_factor # para el acelerado 
+                # current_delay = final_delay + (initial_delay - final_delay) * acceleration_factor # para el frenado 
 
                 GPIO.output(self.STEP, GPIO.HIGH)
                 sleep(current_delay)
@@ -64,4 +65,6 @@ class Stepper():
 """
 Video maestro, contiene como hacer bien el software, microsteping, uso de pwm para no bloquear el hilo de la CPU
 https://youtu.be/LUbhPKBL_IU?si=IOu-vKIIJUFf_AhC
+su blog 
+https://www.rototron.info/raspberry-pi-stepper-motor-tutorial/
 """
