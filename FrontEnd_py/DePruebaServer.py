@@ -12,4 +12,4 @@ def index():
 # Configuración básica
 if __name__ == '__main__':
     # Activamos debug y configuramos para que sea accesible desde cualquier dispositivo
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
