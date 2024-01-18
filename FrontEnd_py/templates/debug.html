@@ -100,6 +100,7 @@
         <p>0.01</p>
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script> <!-- conexión con socket de python -->
 <script>
 // Obtén los elementos del DOM
 var btnHighMas = document.getElementById('btn_High_mas');
@@ -140,6 +141,9 @@ btnIncrementoMenos.addEventListener('click', function() {
     // Disminuye el valor de numIntervalo por un orden de magnitud
     numIntervalo.value = Number(numIntervalo.value) / 10;
 });
+
+// inicializa socket
+const socket = io();
 
 // Agrega event listener al botón de iniciar giro
 btnIniciarGiro.addEventListener('click', function() {
