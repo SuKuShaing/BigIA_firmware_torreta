@@ -73,7 +73,7 @@ def debug():
 
 
 @socketio.on('tiempoPaso')
-def mover(data):
+def mover_debug(data):
     print("data['giro']: ", data['giro'])
     print("data['tiempoHigh']: ", data['tiempoHigh'])
 
