@@ -78,8 +78,8 @@
 <body>
     <h1>Debug Motor</h1>
     <div id="botones">
-        <button>Iniciar giro</button>
-        <button>Detener giro</button>
+        <button id="iniciar_Giro" style="display: block;">Iniciar giro</button>
+        <button id="detener_Giro" style="display: none;">Detener giro</button>
     </div>
     <div id="display_inputs">
         <div id="display_inputs_tiempo">
@@ -108,6 +108,8 @@ var tiempoHigh = document.getElementById('tiempo_high');
 var btnIncrementoMas = document.getElementById('btn_incremento_mas');
 var btnIncrementoMenos = document.getElementById('btn_incremento_menos');
 var numIntervalo = document.getElementById('num_intervalo');
+var btnIniciarGiro = document.getElementById('iniciar_Giro');
+var btnDetenerGiro = document.getElementById('detener_Giro');
 
 // Asegúrate de que el valor inicial del input es un número
 tiempoHigh.value = Number(tiempoHigh.value);
@@ -121,8 +123,10 @@ btnHighMas.addEventListener('click', function() {
 
 // Agrega event listener al botón de menos
 btnHighMenos.addEventListener('click', function() {
-    // Disminuye el valor del input por el valor de numIntervalo
-    tiempoHigh.value = Number(tiempoHigh.value) - Number(numIntervalo.value);
+    // Disminuye el valor del input por el valor de numIntervalo, si el valor actual es mayor que el valor mínimo permitido
+    if (Number(tiempoHigh.value) > Number(tiempoHigh.min)) {
+        tiempoHigh.value = Math.max(Number(tiempoHigh.value) - Number(numIntervalo.value), Number(tiempoHigh.min));
+    }
 });
 
 // Agrega event listener al botón de incremento más
@@ -135,6 +139,34 @@ btnIncrementoMas.addEventListener('click', function() {
 btnIncrementoMenos.addEventListener('click', function() {
     // Disminuye el valor de numIntervalo por un orden de magnitud
     numIntervalo.value = Number(numIntervalo.value) / 10;
+});
+
+// Agrega event listener al botón de iniciar giro
+btnIniciarGiro.addEventListener('click', function() {
+    // Oculta el botón de iniciar giro y muestra el botón de detener giro
+    btnIniciarGiro.style.display = 'none';
+    btnDetenerGiro.style.display = 'block';
+
+    print("tiempoHigh.value: ", tiempoHigh.value);
+
+    // Envía el tiempo con websockets de High al servidor
+    socket.emit('tiempoPaso', { 
+        tiempoHigh: tiempoHigh.value,
+        girar: 1
+    })
+});
+
+// Agrega event listener al botón de detener giro
+btnDetenerGiro.addEventListener('click', function() {
+    // Oculta el botón de detener giro y muestra el botón de iniciar giro
+    btnDetenerGiro.style.display = 'none';
+    btnIniciarGiro.style.display = 'block';
+
+    // Envía el tiempo con websockets de High al servidor
+    socket.emit('tiempoPaso', { 
+        tiempoHigh: tiempoHigh.value,
+        girar: 0
+    })
 });
 </script>
 </html>

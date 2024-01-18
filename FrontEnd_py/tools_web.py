@@ -21,6 +21,7 @@ class Stepper():
             self.DIR = 19  # Número de pin GPIO para la dirección del motor 2
             self.STEP = 26  # Número de pin GPIO para el paso del motor 2
 
+
     def mover_stepper(self, sentido, pasos, delay=0.001): # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
         # Configura el sentido de giro del motor basado en la entrada del usuario ('CW' para sentido de las agujas del reloj y 'CCW' para sentido contrario)
         if sentido == 'CW':
@@ -36,6 +37,24 @@ class Stepper():
             sleep(self.delay)  # Espera el tiempo definido
             GPIO.output(self.STEP, GPIO.LOW)  # apaga
             sleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
+
+
+    def mover_stepper_debug(self, sentido, girar, delay=0.001): # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
+        print(f"Estoy en debugging, entre a la función mover_stepper_debug, girar: {girar} y delay: {delay}")
+        # Configura el sentido de giro del motor basado en la entrada del usuario ('CW' para sentido de las agujas del reloj y 'CCW' para sentido contrario)
+        if sentido == 'CW':
+            self.ROT = 1  # Establece el sentido de rotación como CW (sentido de las agujas del reloj)
+            GPIO.output(self.DIR, 1)  # Configura el pin de dirección para el sentido de las agujas del reloj
+        elif sentido == 'CCW':
+            self.ROT = 0  # Establece el sentido de rotación como CCW (sentido contrario a las agujas del reloj)
+            GPIO.output(self.DIR, 0)  # Configura el pin de dirección para el sentido contrario a las agujas del reloj
+
+        while girar:
+            GPIO.output(self.STEP, GPIO.HIGH)  # Prende 
+            sleep(self.delay)  # Espera el tiempo definido
+            GPIO.output(self.STEP, GPIO.LOW)  # apaga
+            sleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
+
 
     def mover_stepper_suave(self, sentido, pasos):
             initial_delay = 0.0001  # Retraso inicial más grande para arranque suave

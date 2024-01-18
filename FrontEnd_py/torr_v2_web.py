@@ -31,7 +31,7 @@ imágenes de la cámara en el navegador
 ############## Declaración de Variables ###############
 #######################################################
 
-# Incremento general de pasos, puede customizarse
+# Incremento general de pasos, puede personalizarse
 incremento = 10 # 10 pasos
 aumento_incremento = 5 
 
@@ -72,6 +72,11 @@ m2 = Stepper("M2", 2)
 #######################################################
 ###################### Funciones ######################
 #######################################################
+
+def mov_izquierda_prueba(girar, tiempoHigh):
+    m1.mover_stepper_debug('CCW', girar, tiempoHigh)
+    print(f'Estoy en debugging, girar: {girar} y tiempoHigh: {tiempoHigh}')
+
 
 def mov_izquierda():
     m1.mover_stepper('CCW', incremento)

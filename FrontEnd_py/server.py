@@ -20,9 +20,6 @@ socketio = SocketIO(app)
 def index():    #definimos una fc
     return render_template("index.html")  #envía un string
 
-@app.route('/debug')
-def debug():
-    return render_template("index.html")
 
 # @app.route('/about', strict_slashes=False)
 # def about():
@@ -45,7 +42,7 @@ def mover(coord):
 
 @socketio.on('coordAlServidor')
 def fondo(coord):
-    #Cuando se logre conectar la camara, borrar esta función
+    #Cuando se logre conectar la cámara, borrar esta función
     print("posX", coord['posX'])
     print("posY", coord['posY'])
     socketio.emit('coordDelServidor', coord) #socketio.emit es en Broadcasting o Radiodifusión es decir se envía a todos los clientes conectados
@@ -66,7 +63,29 @@ def fuego():
     emit('disparo', "Disparo ejecutado") #emit es solo entre el usuario y el servidor, independiente de cuantos hay conectados
 
 
+##############################################################
+##################### Zona de Debugging ######################
+##############################################################
 
+@app.route('/debug')
+def debug():
+    return render_template("debug.html")
+
+
+@socketio.on('tiempoPaso')
+def mover(data):
+    print("data['giro']: ", data['giro'])
+    print("data['tiempoHigh']: ", data['tiempoHigh'])
+
+    if data['giro']==1:
+        tf.mov_izquierda_prueba(True, data['tiempoHigh'])
+    else:
+        tf.mov_izquierda_prueba(False, data['tiempoHigh'])
+
+
+##############################################################
+##################### Zona de ejecución ######################
+##############################################################
 
 if __name__ == '__main__':
     app.run(port = 1313, debug=False, host="0.0.0.0")  #app.run se encarga de ejecutar el servidor, por defecto en el puerto 5000, y el host por defecto es 127.0.0.1, La aplicación está en modo de prueba, gracias a esta linea cada vez que cambio algo se reinicia el servidor
