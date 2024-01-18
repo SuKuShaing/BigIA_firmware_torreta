@@ -74,10 +74,10 @@ def debug():
 
 @socketio.on('tiempoPaso')
 def mover_debug(data):
-    print("data['giro']: ", data['giro'])
+    print("data['girar']: ", data['girar'])
     print("data['tiempoHigh']: ", data['tiempoHigh'])
 
-    if data['giro']==1:
+    if data['girar']==1:
         tf.mov_izquierda_prueba(True, data['tiempoHigh'])
     else:
         tf.mov_izquierda_prueba(False, data['tiempoHigh'])
