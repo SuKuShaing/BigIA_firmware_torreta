@@ -147,7 +147,7 @@ btnIniciarGiro.addEventListener('click', function() {
     btnIniciarGiro.style.display = 'none';
     btnDetenerGiro.style.display = 'block';
 
-    print("tiempoHigh.value: ", tiempoHigh.value);
+    console.log("tiempoHigh.value: ", tiempoHigh.value);
 
     // Envía el tiempo con websockets de High al servidor
     socket.emit('tiempoPaso', { 
