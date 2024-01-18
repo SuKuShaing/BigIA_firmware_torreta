@@ -20,6 +20,9 @@ socketio = SocketIO(app)
 def index():    #definimos una fc
     return render_template("index.html")  #envía un string
 
+@app.route('/debug')
+def debug():
+    return render_template("index.html")
 
 # @app.route('/about', strict_slashes=False)
 # def about():

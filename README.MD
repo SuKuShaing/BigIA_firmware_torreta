@@ -19,7 +19,7 @@ $ py -m venv venv
 
 // Después de crearlo, hay que activarlo con los siguientes comandos
 
-$ source vent/bin/activate          // para Linux y mac
+$ source venv/bin/activate          // para Linux y mac
 $ .\venv\Scripts\activate           // Usando W10 con Cmder o equivalentes
 $ source ./venv/Scripts/activate    // para w10 usando bash o equivalentes
 
