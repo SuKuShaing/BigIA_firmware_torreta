@@ -11,7 +11,7 @@ class Stepper():
         self.angulo = None
         self.id = id
         self.ROT = 1  # default CW (sentido de giro por defecto, en el sentido de las agujas del reloj)
-        # self.delay = 0.001  # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
+        self.delay = 0.001  # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
 
         # Configuración de los pines DIR (dirección) y STEP (paso) según el ID del motor
         if id == 1:
@@ -22,7 +22,7 @@ class Stepper():
             self.STEP = 26  # Número de pin GPIO para el paso del motor 2
 
 
-    def mover_stepper(self, sentido, pasos, delay=0.001): # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
+    def mover_stepper(self, sentido, pasos): # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
         # Configura el sentido de giro del motor basado en la entrada del usuario ('CW' para sentido de las agujas del reloj y 'CCW' para sentido contrario)
         if sentido == 'CW':
             self.ROT = 1  # Establece el sentido de rotación como CW (sentido de las agujas del reloj)

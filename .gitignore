@@ -1,6 +1,7 @@
 #Carpetas omitidas de subir a github
 venv
 FrontEnd_py/__pycache__
+__pycache__
 
 #Archivos intermedios
 FrontEnd_py/static/css/style.css.map
