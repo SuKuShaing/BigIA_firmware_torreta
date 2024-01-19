@@ -52,8 +52,8 @@ MODE2 = (17, 27, 22)
 
 # Asignación de pines
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(DIR1, GPIO.OUT)
-GPIO.setup(STEP1, GPIO.OUT)
+GPIO.setup(DIR1, GPIO.OUT) # 20 en high
+GPIO.setup(STEP1, GPIO.OUT) # 21 en high
 GPIO.output(DIR1, CW1)
 GPIO.setup(DIR2, GPIO.OUT)
 GPIO.setup(STEP2, GPIO.OUT)
@@ -64,8 +64,8 @@ GPIO.setup(MODE2, GPIO.OUT)
 GPIO.output(MODE1, (0, 0, 0)) # De aquí se regula el microstepping
 GPIO.output(MODE2, (0, 0, 0)) # Microstepping Resolution GPIO
 
-# INSTANCIAS DE LOS STEPPER 
-m1 = Stepper("M1", 1)  
+# INSTANCIAS DE LOS STEPPER
+m1 = Stepper("M1", 1)
 m2 = Stepper("M2", 2)
 
 
