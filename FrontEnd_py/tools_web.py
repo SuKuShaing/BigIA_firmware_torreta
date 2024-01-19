@@ -54,9 +54,9 @@ class Stepper():
 
         for paso in range(pasos):
             GPIO.output(self.STEP, GPIO.HIGH)  # Prende 
-            sleep(self.delay)  # Espera el tiempo definido
+            sleep(delay)  # Espera el tiempo definido
             GPIO.output(self.STEP, GPIO.LOW)  # apaga
-            sleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
+            sleep(delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
             # cada 100 pasos el if se cumple
             if paso % 100 == 0:
                 print(f"Estoy en tools_web, en el paso: {paso} y delay: {delay}")
