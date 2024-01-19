@@ -79,6 +79,7 @@ def debug():
 @socketio.on('tiempoPaso')
 def mover_debug(data):
     print(f"En el server data['pasos']: {data['pasos']} y data['tiempoHigh']: {data['tiempoHigh']}")
+    print(f"El tipo de data['pasos']: {type(data['pasos'])} y data['tiempoHigh']: {type(data['tiempoHigh'])}")
     tf.mov_izquierda_prueba(data['pasos'], data['tiempoHigh'])
 
 

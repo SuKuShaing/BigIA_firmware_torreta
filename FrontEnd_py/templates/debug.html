@@ -179,7 +179,7 @@ btnIniciarGiro.addEventListener('click', function() {
 
     // Envía el tiempo con websockets de High al servidor
     socket.emit('tiempoPaso', { 
-        tiempoHigh: tiempoHigh.value,
+        tiempoHigh: Number(tiempoHigh.value),
         pasos: Number(inputPasos.value)
     })
 });
