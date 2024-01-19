@@ -63,9 +63,13 @@ def fuego():
     emit('disparo', "Disparo ejecutado") #emit es solo entre el usuario y el servidor, independiente de cuantos hay conectados
 
 
+
 ##############################################################
 ##################### Zona de Debugging ######################
 ##############################################################
+
+
+##################### Zona de Debugging ######################
 
 @app.route('/debug')
 def debug():
@@ -74,13 +78,10 @@ def debug():
 
 @socketio.on('tiempoPaso')
 def mover_debug(data):
-    print("data['girar']: ", data['girar'])
-    print("data['tiempoHigh']: ", data['tiempoHigh'])
+    print("En el server data['pasos']: ", data['pasos'])
+    print("En el server data['tiempoHigh']: ", data['tiempoHigh'])
 
-    if data['girar']==1:
-        tf.mov_izquierda_prueba(True, data['tiempoHigh'])
-    else:
-        tf.mov_izquierda_prueba(False, data['tiempoHigh'])
+    tf.mov_izquierda_prueba(True, data['tiempoHigh'])
 
 
 ##############################################################

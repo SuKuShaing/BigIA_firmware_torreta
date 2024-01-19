@@ -73,9 +73,9 @@ m2 = Stepper("M2", 2)
 ###################### Funciones ######################
 #######################################################
 
-def mov_izquierda_prueba(girar, tiempoHigh):
-    m1.mover_stepper_debug('CCW', girar, tiempoHigh)
-    print(f'Estoy en debugging, girar: {girar} y tiempoHigh: {tiempoHigh}')
+def mov_izquierda_prueba(pasos, tiempoHigh):
+    m1.mover_stepper_debug('CCW', pasos, tiempoHigh)
+    print(f'Estoy en debugging, pasos: {pasos} y tiempoHigh: {tiempoHigh}')
 
 
 def mov_izquierda():

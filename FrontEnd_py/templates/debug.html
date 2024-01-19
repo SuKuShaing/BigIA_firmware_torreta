@@ -64,6 +64,11 @@
         justify-content: center;
         align-items: center;
     }
+    #inputs_pasos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     #display_recepcion_tiempo {
         display: flex;
         justify-content: center;
@@ -94,6 +99,12 @@
             <button id="btn_incremento_mas"> + </button>
             <button id="btn_incremento_menos"> - </button>
         </div>
+        <div id="inputs_pasos">
+            <p>Número de pasos para el motor</p>
+            <input id="input_pasos" type="number" step="100" min="0" max="200000" value="200">
+            <button id="btn_pasos_mas"> + </button>
+            <button id="btn_pasos_menos"> - </button>
+        </div>
     </div>
     <div id="display_recepcion_tiempo">
         <p>Tiempo de High recibido del servidor: </p>
@@ -111,18 +122,22 @@ var btnIncrementoMenos = document.getElementById('btn_incremento_menos');
 var numIntervalo = document.getElementById('num_intervalo');
 var btnIniciarGiro = document.getElementById('iniciar_Giro');
 var btnDetenerGiro = document.getElementById('detener_Giro');
+var btnPasosMas = document.getElementById('btn_pasos_mas');
+var btnPasosMenos = document.getElementById('btn_pasos_menos');
+var inputPasos = document.getElementById('input_pasos');
 
 // Asegúrate de que el valor inicial del input es un número
 tiempoHigh.value = Number(tiempoHigh.value);
 numIntervalo.value = Number(numIntervalo.value);
+inputPasos.value = Number(inputPasos.value);
 
-// Agrega event listener al botón de más
+// Agrega event listener al botón de más, para el tiempo de High
 btnHighMas.addEventListener('click', function() {
     // Incrementa el valor del input por el valor de numIntervalo
     tiempoHigh.value = Number(tiempoHigh.value) + Number(numIntervalo.value);
 });
 
-// Agrega event listener al botón de menos
+// Agrega event listener al botón de menos, para el tiempo de High
 btnHighMenos.addEventListener('click', function() {
     // Disminuye el valor del input por el valor de numIntervalo, si el valor actual es mayor que el valor mínimo permitido
     if (Number(tiempoHigh.value) > Number(tiempoHigh.min)) {
@@ -130,17 +145,30 @@ btnHighMenos.addEventListener('click', function() {
     }
 });
 
-// Agrega event listener al botón de incremento más
+// Agrega event listener al botón de incremento más, para el intervalo de incremento
 btnIncrementoMas.addEventListener('click', function() {
     // Incrementa el valor de numIntervalo por un orden de magnitud
     numIntervalo.value = Number(numIntervalo.value) * 10;
 });
 
-// Agrega event listener al botón de incremento menos
+// Agrega event listener al botón de incremento menos, para el intervalo de incremento
 btnIncrementoMenos.addEventListener('click', function() {
     // Disminuye el valor de numIntervalo por un orden de magnitud
     numIntervalo.value = Number(numIntervalo.value) / 10;
 });
+
+// Agrega event listener al botón de más, para el número de pasos
+btnPasosMas.addEventListener('click', function() {
+    // Incrementa el valor del input por 1
+    inputPasos.value = Number(inputPasos.value) + 100;
+});
+
+// Agrega event listener al botón de menos, para el número de pasos, con un mínimo de 0
+btnPasosMenos.addEventListener('click', function() {
+    inputPasos.value = Math.max(Number(inputPasos.value) - 100, 0);
+});
+
+
 
 // inicializa socket
 const socket = io();
@@ -156,7 +184,7 @@ btnIniciarGiro.addEventListener('click', function() {
     // Envía el tiempo con websockets de High al servidor
     socket.emit('tiempoPaso', { 
         tiempoHigh: tiempoHigh.value,
-        girar: 1
+        pasos: Number(inputPasos.value)
     })
 });
 
@@ -169,7 +197,7 @@ btnDetenerGiro.addEventListener('click', function() {
     // Envía el tiempo con websockets de High al servidor
     socket.emit('tiempoPaso', { 
         tiempoHigh: tiempoHigh.value,
-        girar: 0
+        pasos: 0
     })
 });
 </script>
