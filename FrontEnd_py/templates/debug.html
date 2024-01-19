@@ -83,8 +83,8 @@
 <body>
     <h1>Debug Motor</h1>
     <div id="botones">
-        <button id="iniciar_Giro" style="display: block;">Iniciar giro</button>
-        <button id="detener_Giro" style="display: none;">Detener giro</button>
+        <button id="iniciar_Giro">Iniciar giro</button>
+        <button id="detener_Giro">Detener giro</button>
     </div>
     <div id="display_inputs">
         <div id="display_inputs_tiempo">
@@ -175,10 +175,6 @@ const socket = io();
 
 // Agrega event listener al botón de iniciar giro
 btnIniciarGiro.addEventListener('click', function() {
-    // Oculta el botón de iniciar giro y muestra el botón de detener giro
-    btnIniciarGiro.style.display = 'none';
-    btnDetenerGiro.style.display = 'block';
-
     console.log("tiempoHigh.value: ", tiempoHigh.value);
 
     // Envía el tiempo con websockets de High al servidor
@@ -190,10 +186,6 @@ btnIniciarGiro.addEventListener('click', function() {
 
 // Agrega event listener al botón de detener giro
 btnDetenerGiro.addEventListener('click', function() {
-    // Oculta el botón de detener giro y muestra el botón de iniciar giro
-    btnDetenerGiro.style.display = 'none';
-    btnIniciarGiro.style.display = 'block';
-
     // Envía el tiempo con websockets de High al servidor
     socket.emit('tiempoPaso', { 
         tiempoHigh: tiempoHigh.value,

@@ -54,7 +54,9 @@ class Stepper():
             sleep(self.delay)  # Espera el tiempo definido
             GPIO.output(self.STEP, GPIO.LOW)  # apaga
             sleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
-            print(f"Estoy en tools_web, pasos: {paso} y delay: {delay}")
+            # cada 100 pasos el if se cumple
+            if paso % 100 == 0:
+                print(f"Estoy en tools_web, en el paso: {paso} y delay: {delay}")
 
 
     def mover_stepper_suave(self, sentido, pasos):
