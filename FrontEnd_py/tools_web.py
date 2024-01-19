@@ -49,11 +49,12 @@ class Stepper():
             self.ROT = 0  # Establece el sentido de rotación como CCW (sentido contrario a las agujas del reloj)
             GPIO.output(self.DIR, 0)  # Configura el pin de dirección para el sentido contrario a las agujas del reloj
 
-        for x in range(pasos):
+        for paso in range(pasos):
             GPIO.output(self.STEP, GPIO.HIGH)  # Prende 
             sleep(self.delay)  # Espera el tiempo definido
             GPIO.output(self.STEP, GPIO.LOW)  # apaga
             sleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
+            print(f"Estoy en tools_web, pasos: {paso} y delay: {delay}")
 
 
     def mover_stepper_suave(self, sentido, pasos):

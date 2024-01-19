@@ -74,8 +74,8 @@ m2 = Stepper("M2", 2)
 #######################################################
 
 def mov_izquierda_prueba(pasos, tiempoHigh):
+    print(f'Estoy en torr_v2_web, pasos: {pasos} y tiempoHigh: {tiempoHigh}')
     m1.mover_stepper_debug('CCW', pasos, tiempoHigh)
-    print(f'Estoy en debugging, pasos: {pasos} y tiempoHigh: {tiempoHigh}')
 
 
 def mov_izquierda():
