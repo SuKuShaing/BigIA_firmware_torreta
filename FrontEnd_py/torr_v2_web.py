@@ -121,6 +121,8 @@ def disparar():
     sleep(0.1)
     GPIO.output(SHOT, 0)
     print("Disparo")
+    sleep(5)
+    print("Termino disparo")
 
 
 def laser():

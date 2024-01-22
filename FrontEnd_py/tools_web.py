@@ -93,4 +93,8 @@ Video maestro, contiene como hacer bien el software, microsteping, uso de pwm pa
 https://youtu.be/LUbhPKBL_IU?si=IOu-vKIIJUFf_AhC
 su blog 
 https://www.rototron.info/raspberry-pi-stepper-motor-tutorial/
+
+delay máximo (tiempo mínimo de paso para el motor nema) 0,0005 seg
+delay optimo (tiempo mínimo de paso para el motor nema) 0,001 seg
+delay mínimo (tiempo mínimo de paso para el motor nema) 0,05 seg (se puede menos, pero este está bien)
 """
