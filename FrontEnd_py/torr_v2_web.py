@@ -61,7 +61,7 @@ GPIO.output(DIR2, CW2)
 GPIO.setup(SHOT, GPIO.OUT)
 GPIO.setup(MODE1, GPIO.OUT)
 GPIO.setup(MODE2, GPIO.OUT)
-GPIO.output(MODE1, (0, 0, 0)) # De aquí se regula el microstepping
+GPIO.output(MODE1, (1, 0, 0)) # De aquí se regula el microstepping
 GPIO.output(MODE2, (0, 0, 0)) # Microstepping Resolution GPIO
 
 # INSTANCIAS DE LOS STEPPER
@@ -74,7 +74,7 @@ m2 = Stepper("M2", 2)
 #######################################################
 
 def mov_izquierda_prueba(pasos, tiempoHigh):
-    print(f'Estoy en torr_v2_web, pasos: {pasos} y tiempoHigh: {tiempoHigh}')
+    # print(f'Estoy en torr_v2_web, pasos: {pasos} y tiempoHigh: {tiempoHigh}')
     m1.mover_stepper_debug('CCW', pasos, tiempoHigh)
 
 
@@ -103,7 +103,7 @@ def aum_vel_mov():
     global aumento_incremento
     incremento += aumento_incremento
     print(f'Pasos por click o incremento es de: {incremento}')
-    print('Recordar el valor máximo de pasos por click, el limite de velocidad del motor')
+    # print('Recordar el valor máximo de pasos por click, el limite de velocidad del motor')
 
 
 def dis_vel_mov():
@@ -121,8 +121,6 @@ def disparar():
     sleep(0.1)
     GPIO.output(SHOT, 0)
     print("Disparo")
-    sleep(5)
-    print("Termino disparo")
 
 
 def laser():

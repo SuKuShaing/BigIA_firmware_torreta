@@ -43,8 +43,8 @@ def mover(coord):
 @socketio.on('coordAlServidor')
 def fondo(coord):
     #Cuando se logre conectar la cámara, borrar esta función
-    print("posX", coord['posX'])
-    print("posY", coord['posY'])
+    # print("posX", coord['posX'])
+    # print("posY", coord['posY'])
     socketio.emit('coordDelServidor', coord) #socketio.emit es en Broadcasting o Radiodifusión es decir se envía a todos los clientes conectados
 
 
@@ -78,8 +78,8 @@ def debug():
 
 @socketio.on('tiempoPaso')
 def mover_debug(data):
-    print(f"En el server data['pasos']: {data['pasos']} y data['tiempoHigh']: {data['tiempoHigh']}")
-    print(f"El tipo de data['pasos']: {type(data['pasos'])} y data['tiempoHigh']: {type(data['tiempoHigh'])}")
+    # print(f"En el server data['pasos']: {data['pasos']} y data['tiempoHigh']: {data['tiempoHigh']}")
+    # print(f"El tipo de data['pasos']: {type(data['pasos'])} y data['tiempoHigh']: {type(data['tiempoHigh'])}")
     tf.mov_izquierda_prueba(data['pasos'], data['tiempoHigh'])
 
 

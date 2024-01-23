@@ -12,7 +12,6 @@ class Stepper():
         self.id = id
         self.ROT = 1  # default CW (sentido de giro por defecto, en el sentido de las agujas del reloj)
         self.delay = 0.001  # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
-        self.en_ejecucion = False
 
         # Configuración de los pines DIR (dirección) y STEP (paso) según el ID del motor
         if id == 1:
@@ -32,11 +31,6 @@ class Stepper():
             self.ROT = 0  # Establece el sentido de rotación como CCW (sentido contrario a las agujas del reloj)
             GPIO.output(self.DIR, 0)  # Configura el pin de dirección para el sentido contrario a las agujas del reloj
 
-        if self.en_ejecucion:
-            print("La función ya está en ejecución")
-
-        self.en_ejecucion = True
-
         # Genera el número de pasos especificados
         for x in range(pasos):
             GPIO.output(self.STEP, GPIO.HIGH)  # Prende
@@ -44,7 +38,6 @@ class Stepper():
             GPIO.output(self.STEP, GPIO.LOW)  # apaga
             sleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
 
-        self.en_ejecucion = False
 
     def mover_stepper_debug(self, sentido, pasos, delay=0.01): # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
         # medir el tiempo que demora en ejecutarse la función
