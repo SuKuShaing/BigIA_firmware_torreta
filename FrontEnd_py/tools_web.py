@@ -94,7 +94,33 @@ https://youtu.be/LUbhPKBL_IU?si=IOu-vKIIJUFf_AhC
 su blog 
 https://www.rototron.info/raspberry-pi-stepper-motor-tutorial/
 
-delay máximo (tiempo mínimo de paso para el motor nema) 0,0005 seg
-delay optimo (tiempo mínimo de paso para el motor nema) 0,001 seg
-delay mínimo (tiempo mínimo de paso para el motor nema) 0,05 seg (se puede menos, pero este está bien)
+Para Pasos enteros:
+    delay máximo (tiempo mínimo de paso para el motor nema) 0,0005 seg
+    delay optimo (tiempo mínimo de paso para el motor nema) 0,001 seg
+    delay mínimo (tiempo mínimo de paso para el motor nema) 0,05 seg (se puede menos, pero este está bien)
+
+Para microstepping de 1/32:
+    delay máximo (Colocando un número más chico, no hay aumento en la velocidad de giro)    0,00001 seg
+    delay optimo (tiempo optimo)                                                            0,0001 seg
+    delay mínimo (Un número más grande que eso gira muy lento)                              0,001 seg
+"""
+
+"""
+def while true:
+    obtener todos los elementos de la cola en una dirección, se suman
+
+    se pasan a una variable que mantiene la cantidad_de_pasos
+
+    if contar_pasos < cantidad_de_pasos:
+        if contar_pasos < 100:
+            mover_stepper con curva de aceleración
+        if contar_pasos >= 100:
+            mover_stepper a velocidad maxima constante
+        if cantidad_de_pasos - contar_pasos > 100:
+            frenar con curva de desaceleración
+        contar_pasos += 1
+
+
+En la variable que mantiene la cantidad de pasos colocar un condicional 
+por si es que el usuario cambia de dirección cosa de que frene y cambia de dirección
 """
