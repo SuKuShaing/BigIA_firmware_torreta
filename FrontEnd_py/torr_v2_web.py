@@ -1,4 +1,4 @@
-# Importar librerias
+# Importar librerías
 import time
 from time import sleep
 # import numpy as np
@@ -8,6 +8,8 @@ import RPi.GPIO as GPIO
 # import threading as th
 # from threading import Event
 from tools_web import Stepper
+import queue
+import threading
 
 """
 #######################################################
@@ -64,9 +66,18 @@ GPIO.setup(MODE2, GPIO.OUT)
 GPIO.output(MODE1, (1, 1, 1)) # De aquí se regula el microstepping
 GPIO.output(MODE2, (1, 1, 1)) # Microstepping Resolution GPIO
 
+
+#######################################################
+################# Iniciar los motores #################
+#######################################################
+
+# aquí van las colas para cada motor, se instancia y se crean
+
 # INSTANCIAS DE LOS STEPPER
 m1 = Stepper("M1", 1)
 m2 = Stepper("M2", 2)
+
+#se crea el hilo para cada motor
 
 
 #######################################################

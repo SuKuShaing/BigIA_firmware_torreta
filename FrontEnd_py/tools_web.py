@@ -87,6 +87,24 @@ class Stepper():
                 GPIO.output(self.STEP, GPIO.LOW)
                 sleep(current_delay)
 
+    def mover_infinito():
+        while True:
+            pass
+            
+            # Se obtienen todos los datos de la cola con un for y se pasan a una lista
+                # se analizan en busca si hay un cambio de dirección, sino hay, se suman todos los pasos y se guardan en pasos a ejecutar
+                # si hay una cambio de dirección, se ejecuta el cambio de dirección pasando "solo 100 pasos" para que frene o una opción de freno 
+            
+            # pasos_a_ejecutar
+            # pasos_que_llevo, (velocidad_que_llevo), cuenta cuantos pasos que lleva para elegir el modo de velocidad a ejecutar
+                # Evaluó los pasos que llevo y en que estoy, entre 0 a 100 mayor o mayor a 100 (teniendo en cuenta que 100 es solo una referencia, dado es el 45° por su equivalente en pasos, ese es el espacio que me voy a tomar para acelerar y frenar, puede ser menos)
+                # ahora hay que hacer una división pasos_a_ejecutar / 2, si es mayor a (100/2) ejecutar el modo aceleración y los pasos_a_ejecutar son mayores a los pasos_que_llevo acelerar
+                    # modo aceleración, tomo la velocidad (pasos_que_llevo) y voy aumentando la velocidad hasta llegar a la velocidad máxima constante
+                # si es menor a (100/2) ejecutar el modo frenado con los pasos a ejecutar o los pasos_que_llevo son iguales o menor a los pasos_a_ejecutar, frenar
+                    # modo frenado, le paso los 100 y voy disminuyendo la velocidad hasta llegar a cero, ambos deben llegar a cero
+
+                # disminuyo en uno los pasos_a_ejecutar, después de cada pasada
+
 
 """
 Video maestro, contiene como hacer bien el software, microsteping, uso de pwm para no bloquear el hilo de la CPU
@@ -104,6 +122,7 @@ Para microstepping de 1/32:
     delay optimo (tiempo optimo)                                                            0,0001 seg
     delay mínimo (Un número más grande que eso gira muy lento)                              0,001 seg
 """
+
 
 """
 def while true:
@@ -123,4 +142,6 @@ def while true:
 
 En la variable que mantiene la cantidad de pasos colocar un condicional 
 por si es que el usuario cambia de dirección cosa de que frene y cambia de dirección
+
+que si va en una dirección u en otra, con el joistick 
 """
