@@ -166,8 +166,6 @@ class Stepper():
                         current_delay = delay_inicial + (delay_final - delay_inicial) * acceleration_factor # para el acelerado 
                         # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el acelerado 
 
-                        print(f'current_delay: {current_delay}')
-                        
                         GPIO.output(self.STEP, GPIO.HIGH)
                         sleep(current_delay)
                         GPIO.output(self.STEP, GPIO.LOW)
@@ -176,7 +174,6 @@ class Stepper():
                         pasos_que_llevo += 1
                     else:
                         # modo velocidad constante
-                        print(f'current_delay: {delay_final}')
                         GPIO.output(self.STEP, GPIO.HIGH)
                         sleep(delay_final)
                         GPIO.output(self.STEP, GPIO.LOW)
@@ -187,8 +184,6 @@ class Stepper():
                     # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor
                     current_delay = (delay_inicial - delay_final) * (1 - acceleration_factor) + delay_final # para el frenado
                     
-                    print(f'current_delay: {current_delay}')
-
                     GPIO.output(self.STEP, GPIO.HIGH)
                     sleep(current_delay)
                     GPIO.output(self.STEP, GPIO.LOW)
@@ -203,7 +198,7 @@ class Stepper():
 
                 # print(f"pasos_a_ejecutar: {pasos_a_ejecutar} y pasos_que_llevo: {pasos_que_llevo}")
                 elapsed_time = time.time() - start_time
-                # print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
+                print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
 
 """
 Video maestro, contiene como hacer bien el software, microsteping, uso de pwm para no bloquear el hilo de la CPU
