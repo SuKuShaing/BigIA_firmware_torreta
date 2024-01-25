@@ -98,6 +98,8 @@ class Stepper():
         while True:
             # Se obtienen todos los datos de la cola con un for y se pasan a una lista
             
+            start_time = time.time()
+
             # verifico si la cola esta vacía, si esta vacía, no hago nada, si no esta vacía, obtengo todos los elementos de la cola
             if not cola.empty():
                 print("lo que hay en la cola: ", cola)
@@ -193,6 +195,8 @@ class Stepper():
                 pasos_a_ejecutar = max(0, pasos_a_ejecutar)
 
                 print(f"pasos_a_ejecutar: {pasos_a_ejecutar} y pasos_que_llevo: {pasos_que_llevo}")
+                elapsed_time = time.time() - start_time
+                print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
 
 """
 Video maestro, contiene como hacer bien el software, microsteping, uso de pwm para no bloquear el hilo de la CPU
