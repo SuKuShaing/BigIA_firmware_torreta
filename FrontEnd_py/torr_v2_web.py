@@ -49,8 +49,8 @@ CCW2 = 0
 
 # Disparador
 SHOT = 25
-MODE1 = (14, 15, 18)  
-MODE2 = (17, 27, 22)  
+MODE1 = (14, 15, 18) # Mode 0, Mode 1, Mode 2
+MODE2 = (17, 27, 22)  # Mode 0, Mode 1, Mode 2
 
 # Asignación de pines
 GPIO.setmode(GPIO.BCM)
@@ -63,8 +63,8 @@ GPIO.output(DIR2, CW2)
 GPIO.setup(SHOT, GPIO.OUT)
 GPIO.setup(MODE1, GPIO.OUT)
 GPIO.setup(MODE2, GPIO.OUT)
-GPIO.output(MODE1, (1, 1, 1)) # De aquí se regula el microstepping
-GPIO.output(MODE2, (1, 1, 1)) # Microstepping Resolution GPIO
+GPIO.output(MODE1, (0, 0, 1)) # De aquí se regula el microstepping
+GPIO.output(MODE2, (0, 0, 1)) # Microstepping Resolution GPIO
 
 
 #######################################################
