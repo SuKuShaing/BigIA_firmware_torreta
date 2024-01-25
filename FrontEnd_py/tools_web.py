@@ -102,10 +102,10 @@ class Stepper():
 
             # verifico si la cola esta vacía, si esta vacía, no hago nada, si no esta vacía, obtengo todos los elementos de la cola
             if not cola.empty():
-                print("lo que hay en la cola: ", cola)
+                # print("lo que hay en la cola: ", cola)
                 for i in range(cola.qsize()):
                     datos.append(cola.get())
-                print("lo que hay en la lista de datos: ", datos)
+                # print("lo que hay en la lista de datos: ", datos)
                 # se analizan en busca si hay un cambio de dirección, sino hay, se suman todos los pasos y se guardan en pasos a ejecutar
                 # si hay una cambio de dirección, se ejecuta el cambio de dirección pasando "solo 100 pasos" para que frene o una opción de freno 
 

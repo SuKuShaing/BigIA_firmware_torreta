@@ -63,8 +63,8 @@ GPIO.output(DIR2, CW2)
 GPIO.setup(SHOT, GPIO.OUT)
 GPIO.setup(MODE1, GPIO.OUT)
 GPIO.setup(MODE2, GPIO.OUT)
-GPIO.output(MODE1, (0, 0, 1)) # De aquí se regula el microstepping
-GPIO.output(MODE2, (0, 0, 1)) # Microstepping Resolution GPIO
+GPIO.output(MODE1, (0, 0, 0)) # De aquí se regula el microstepping
+GPIO.output(MODE2, (0, 0, 0)) # Microstepping Resolution GPIO
 
 
 #######################################################
