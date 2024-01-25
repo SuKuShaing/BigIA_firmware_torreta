@@ -191,8 +191,8 @@ let lastCall = 0;
 
 function moverTorreta(xx, yy){
   const now = Date.now();
-  if (now - lastCall < 200) 
-    return; // Si han pasado menos de 200ms desde la última llamada, no hagas nada
+  if (now - lastCall < 500) 
+    return; // Si han pasado menos de 300ms desde la última llamada, no hagas nada
 
   lastCall = now;
 
