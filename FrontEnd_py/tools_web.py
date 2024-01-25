@@ -89,7 +89,7 @@ class Stepper():
 
     def mover_infinito(self, cola):
         pasos_que_llevo = 0
-        pasos_que_llevo_maximos = int((30/360)*200*32) # 30° de 360°, 200 pasos por vuelta por 32 microsteps, el máximo de pasos se alcanza en 30°
+        pasos_que_llevo_maximos = int((90/360)*200*1) # 90° de 360°, 200 pasos por vuelta por 32 microsteps(por 1 porque el microsteps está desactivado), el máximo de pasos se alcanza en 30°
         pasos_a_ejecutar = 0
         datos = []
         delay_inicial = 0.05
@@ -164,6 +164,9 @@ class Stepper():
                         # modo aceleración
                         acceleration_factor = pasos_que_llevo / pasos_que_llevo_maximos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
                         current_delay = delay_inicial + (delay_final - delay_inicial) * acceleration_factor # para el acelerado 
+                        # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el acelerado 
+                        delay_inicial = 0.05
+                        delay_final = 0.0005
 
                         GPIO.output(self.STEP, GPIO.HIGH)
                         sleep(current_delay)
@@ -180,8 +183,9 @@ class Stepper():
                 else:
                     # modo frenado
                     acceleration_factor = pasos_que_llevo / pasos_que_llevo_maximos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
-                    current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el frenado 
-
+                    # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el frenado 
+                    current_delay = delay_inicial + (delay_final * acceleration_factor) # para el frenado 
+                    
                     GPIO.output(self.STEP, GPIO.HIGH)
                     sleep(current_delay)
                     GPIO.output(self.STEP, GPIO.LOW)
