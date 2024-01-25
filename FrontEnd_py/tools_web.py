@@ -92,8 +92,8 @@ class Stepper():
         pasos_que_llevo_maximos = int((30/360)*200*32) # 30° de 360°, 200 pasos por vuelta por 32 microsteps, el máximo de pasos se alcanza en 30°
         pasos_a_ejecutar = 0
         datos = []
-        delay_inicial = 0.001
-        delay_final = 0.00001
+        delay_inicial = 0.05
+        delay_final = 0.0005
         print(f"Inicie el thread del motor {self.id}")
         while True:
             # Se obtienen todos los datos de la cola con un for y se pasan a una lista
