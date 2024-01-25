@@ -94,6 +94,7 @@ class Stepper():
         datos = []
         delay_inicial = 0.001
         delay_final = 0.00001
+        print(f"Inicie el thread del motor {self.id}")
         while True:
             # Se obtienen todos los datos de la cola con un for y se pasan a una lista
             

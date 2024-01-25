@@ -83,6 +83,9 @@ m2 = Stepper("M2", 2)
 thread_m1 = threading.Thread(target=m1.mover_infinito, args=(cola_m1,))
 thread_m2 = threading.Thread(target=m2.mover_infinito, args=(cola_m2,))
 
+thread_m1.start()
+thread_m2.start()
+
 #######################################################
 ###################### Funciones ######################
 #######################################################
