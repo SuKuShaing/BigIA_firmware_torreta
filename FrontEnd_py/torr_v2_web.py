@@ -71,14 +71,17 @@ GPIO.output(MODE2, (1, 1, 1)) # Microstepping Resolution GPIO
 ################# Iniciar los motores #################
 #######################################################
 
-# aquí van las colas para cada motor, se instancia y se crean
+# aquí va la instancia de cola para cada motor
+cola_m1 = queue.Queue()
+cola_m2 = queue.Queue()
 
 # INSTANCIAS DE LOS STEPPER
 m1 = Stepper("M1", 1)
 m2 = Stepper("M2", 2)
 
-#se crea el hilo para cada motor
-
+# se instancia el thread para cada motor
+thread_m1 = threading.Thread(target=m1.mover_infinito, args=(cola_m1,))
+thread_m2 = threading.Thread(target=m2.mover_infinito, args=(cola_m2,))
 
 #######################################################
 ###################### Funciones ######################
@@ -90,13 +93,15 @@ def mov_izquierda_prueba(pasos, tiempoHigh):
 
 
 def mov_izquierda():
-    m1.mover_stepper('CCW', incremento)
-    print("Mover a la izquierda")
+    # m1.mover_stepper('CCW', incremento)
+    cola_m1.put(-incremento)
+    print(f"Puse en cola {incremento} pasos a la izquierda")
 
 
 def mov_derecha():
-    m1.mover_stepper('CW', incremento)
-    print("Mover a la derecha")
+    # m1.mover_stepper('CW', incremento)
+    cola_m1.put(incremento)
+    print(f"Puse en cola {incremento} pasos a la derecha")
 
 
 def mov_arriba():

@@ -87,24 +87,111 @@ class Stepper():
                 GPIO.output(self.STEP, GPIO.LOW)
                 sleep(current_delay)
 
-    def mover_infinito():
+    def mover_infinito(self, cola):
+        pasos_que_llevo = 0
+        pasos_que_llevo_maximos = int((30/360)*200*32) # 30° de 360°, 200 pasos por vuelta por 32 microsteps, el máximo de pasos se alcanza en 30°
+        pasos_a_ejecutar = 0
+        datos = []
+        delay_inicial = 0.001
+        delay_final = 0.00001
         while True:
-            pass
-            
             # Se obtienen todos los datos de la cola con un for y se pasan a una lista
+            
+            # verifico si la cola esta vacía, si esta vacía, no hago nada, si no esta vacía, obtengo todos los elementos de la cola
+            if not cola.empty():
+                print("lo que hay en la cola: ", cola)
+                for i in range(cola.qsize()):
+                    datos.append(cola.get())
+                print("lo que hay en la lista de datos: ", datos)
                 # se analizan en busca si hay un cambio de dirección, sino hay, se suman todos los pasos y se guardan en pasos a ejecutar
                 # si hay una cambio de dirección, se ejecuta el cambio de dirección pasando "solo 100 pasos" para que frene o una opción de freno 
-            
+
+                # Verificar si todos los elementos tienen el mismo signo
+                mismo_signo = all(x >= 0 for x in datos) or all(x < 0 for x in datos)
+                if mismo_signo:
+                    # Dirección del giro en base al primer elemento de la lista
+                    if datos[0] >= 0:
+                        # 'CW'
+                        self.ROT = 1
+                        GPIO.output(self.DIR, 1)
+                        print("CW")
+                    elif datos[0] < 0:
+                        self.ROT = 0
+                        GPIO.output(self.DIR, 0)
+                        print("CCW")
+
+                    pasos_a_ejecutar = int(sum(abs(dato) for dato in datos))
+                    datos.clear()
+                else:
+                    print("Hay un signo opuesto en la lista de datos")
+                    pasos_a_ejecutar = pasos_que_llevo
+                    datos.clear()
+
+                # Necesito borrar todos los elementos anteriores al elemento que cambia de signo en la lista datos
+                
+                # Find the index of the element that changes sign
+                # index = next((i for i, (a, b) in enumerate(zip(datos, datos[1:])) if a >= 0 and b < 0 or a < 0 and b >= 0), None)
+
+                # Crea pares de elementos adyacentes en 'datos'
+                # pares_adyacentes = zip(datos, datos[1:]) #devuelve una nueva lista que contiene todos los elementos de la lista datos excepto el primero.
+
+                # Crea una lista de índices donde los elementos adyacentes cambian de signo
+                # indices_cambio_signo = [i for i, (a, b) in enumerate(pares_adyacentes) if (a >= 0 and b < 0) or (a < 0 and b >= 0)]
+
+                # Obtiene el primer índice de cambio de signo, o None si no hay ninguno
+                # index = next(iter(indices_cambio_signo), None)
+
+                # Remove all elements before the index
+                # if index is not None:
+                #     datos = datos[index:]
+
+
             # pasos_a_ejecutar
             # pasos_que_llevo, (velocidad_que_llevo), cuenta cuantos pasos que lleva para elegir el modo de velocidad a ejecutar
-                # Evaluó los pasos que llevo y en que estoy, entre 0 a 100 mayor o mayor a 100 (teniendo en cuenta que 100 es solo una referencia, dado es el 45° por su equivalente en pasos, ese es el espacio que me voy a tomar para acelerar y frenar, puede ser menos)
+                # Evaluó los pasos que llevo y en que estoy, entre 0 a 100 mayor o mayor a 100 (teniendo en cuenta que 100 es solo una referencia, dado es el 30° por su equivalente en pasos, ese es el espacio que me voy a tomar para acelerar y frenar, puede ser menos)
                 # ahora hay que hacer una división pasos_a_ejecutar / 2, si es mayor a (100/2) ejecutar el modo aceleración y los pasos_a_ejecutar son mayores a los pasos_que_llevo acelerar
                     # modo aceleración, tomo la velocidad (pasos_que_llevo) y voy aumentando la velocidad hasta llegar a la velocidad máxima constante
                 # si es menor a (100/2) ejecutar el modo frenado con los pasos a ejecutar o los pasos_que_llevo son iguales o menor a los pasos_a_ejecutar, frenar
-                    # modo frenado, le paso los 100 y voy disminuyendo la velocidad hasta llegar a cero, ambos deben llegar a cero
+                    # modo frenado, le paso los 100 y voy disminuyendo la velocidad hasta llegar a cero, ambos deben llegar a cero juntos
 
                 # disminuyo en uno los pasos_a_ejecutar, después de cada pasada
+            if pasos_a_ejecutar > 0:
+                if pasos_a_ejecutar > pasos_que_llevo:
+                    if pasos_que_llevo < pasos_que_llevo_maximos:
+                        # modo aceleración
+                        acceleration_factor = pasos_que_llevo / pasos_que_llevo_maximos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
+                        current_delay = delay_inicial + (delay_final - delay_inicial) * acceleration_factor # para el acelerado 
 
+                        GPIO.output(self.STEP, GPIO.HIGH)
+                        sleep(current_delay)
+                        GPIO.output(self.STEP, GPIO.LOW)
+                        sleep(current_delay)
+
+                        pasos_que_llevo += 1
+                    else:
+                        # modo velocidad constante
+                        GPIO.output(self.STEP, GPIO.HIGH)
+                        sleep(delay_final)
+                        GPIO.output(self.STEP, GPIO.LOW)
+                        sleep(delay_final)
+                else:
+                    # modo frenado
+                    acceleration_factor = pasos_que_llevo / pasos_que_llevo_maximos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
+                    current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el frenado 
+
+                    GPIO.output(self.STEP, GPIO.HIGH)
+                    sleep(current_delay)
+                    GPIO.output(self.STEP, GPIO.LOW)
+                    sleep(current_delay)
+
+                    pasos_que_llevo -= 1
+                    pasos_que_llevo = max(0, pasos_que_llevo)
+
+                pasos_a_ejecutar -= 1
+                # verificar que pasos_a_ejecutar no sea negativo, si es negativo, ponerlo en cero, eligiendo el máximo entre 0 y pasos_a_ejecutar
+                pasos_a_ejecutar = max(0, pasos_a_ejecutar)
+
+                print(f"pasos_a_ejecutar: {pasos_a_ejecutar} y pasos_que_llevo: {pasos_que_llevo}")
 
 """
 Video maestro, contiene como hacer bien el software, microsteping, uso de pwm para no bloquear el hilo de la CPU
