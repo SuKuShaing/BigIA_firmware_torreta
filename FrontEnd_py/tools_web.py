@@ -194,7 +194,7 @@ class Stepper():
                 # verificar que pasos_a_ejecutar no sea negativo, si es negativo, ponerlo en cero, eligiendo el máximo entre 0 y pasos_a_ejecutar
                 pasos_a_ejecutar = max(0, pasos_a_ejecutar)
 
-                print(f"pasos_a_ejecutar: {pasos_a_ejecutar} y pasos_que_llevo: {pasos_que_llevo}")
+                # print(f"pasos_a_ejecutar: {pasos_a_ejecutar} y pasos_que_llevo: {pasos_que_llevo}")
                 elapsed_time = time.time() - start_time
                 print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
 
