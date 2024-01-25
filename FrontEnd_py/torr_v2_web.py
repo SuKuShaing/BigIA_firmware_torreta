@@ -108,13 +108,15 @@ def mov_derecha():
 
 
 def mov_arriba():
-    m2.mover_stepper('CW', incremento)
-    print("Mover arriba")
+    # m2.mover_stepper('CW', incremento)
+    cola_m2.put(incremento)
+    print(f"Puse en cola {incremento} pasos arriba")
 
 
 def mov_abajo():
-    m2.mover_stepper('CCW', incremento)
-    print("Mover abajo")
+    # m2.mover_stepper('CCW', incremento)
+    cola_m2.put(-incremento)
+    print(f"Puse en cola {incremento} pasos abajo")
 
 
 def aum_vel_mov():
