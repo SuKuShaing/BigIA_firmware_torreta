@@ -89,7 +89,7 @@ class Stepper():
 
     def mover_infinito(self, cola):
         pasos_que_llevo = 0
-        pasos_que_llevo_maximos = int((90/360)*200*1) # 90° de 360°, 200 pasos por vuelta por 32 microsteps(por 1 porque el microsteps está desactivado), el máximo de pasos se alcanza en 30°
+        pasos_que_llevo_maximos = int((45/360)*200*1) # 90° de 360°, 200 pasos por vuelta por 32 microsteps(por 1 porque el microsteps está desactivado), el máximo de pasos se alcanza en 30°
         pasos_a_ejecutar = 0
         datos = []
         delay_inicial = 0.05
@@ -165,9 +165,9 @@ class Stepper():
                         acceleration_factor = pasos_que_llevo / pasos_que_llevo_maximos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
                         current_delay = delay_inicial + (delay_final - delay_inicial) * acceleration_factor # para el acelerado 
                         # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el acelerado 
-                        delay_inicial = 0.05
-                        delay_final = 0.0005
 
+                        print(f'current_delay: {current_delay}')
+                        
                         GPIO.output(self.STEP, GPIO.HIGH)
                         sleep(current_delay)
                         GPIO.output(self.STEP, GPIO.LOW)
@@ -176,6 +176,7 @@ class Stepper():
                         pasos_que_llevo += 1
                     else:
                         # modo velocidad constante
+                        print(f'current_delay: {delay_final}')
                         GPIO.output(self.STEP, GPIO.HIGH)
                         sleep(delay_final)
                         GPIO.output(self.STEP, GPIO.LOW)
@@ -183,9 +184,11 @@ class Stepper():
                 else:
                     # modo frenado
                     acceleration_factor = pasos_que_llevo / pasos_que_llevo_maximos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
-                    # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el frenado 
-                    current_delay = delay_inicial + (delay_final * acceleration_factor) # para el frenado 
+                    # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor
+                    current_delay = (delay_inicial - delay_final) * (1 - acceleration_factor) + delay_final # para el frenado
                     
+                    print(f'current_delay: {current_delay}')
+
                     GPIO.output(self.STEP, GPIO.HIGH)
                     sleep(current_delay)
                     GPIO.output(self.STEP, GPIO.LOW)
@@ -200,7 +203,7 @@ class Stepper():
 
                 # print(f"pasos_a_ejecutar: {pasos_a_ejecutar} y pasos_que_llevo: {pasos_que_llevo}")
                 elapsed_time = time.time() - start_time
-                print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
+                # print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
 
 """
 Video maestro, contiene como hacer bien el software, microsteping, uso de pwm para no bloquear el hilo de la CPU
