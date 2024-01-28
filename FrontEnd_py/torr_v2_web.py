@@ -137,6 +137,7 @@ def dis_vel_mov():
         print('Pasos por click o incremento llegaría a cero, Explorar que pasa en esta situación')
 
 
+# Esto se puede colocar en otra hoja
 def disparar():
     GPIO.output(SHOT, 1)
     sleep(0.1)

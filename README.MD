@@ -10,41 +10,56 @@ Para solicitar permisos, avisar a Seba :D
 Siempre es importante trabajar dentro de un entorno, puesto que así evitamos que se contaminen las librerías que usamos en cada proyecto, con las librerías de otros proyectos.
 Seguir estos pasos en órden, el símbolo "$" indica que lo que sigue se debe pegar en la consola
 
-// se van a crear carpetas del entorno 
-// -m : modulo
-// venv : Virtual environment
-// el último "venv" es el nombre de la carpeta a crear, se puede cambiar, pero lo dejamos así porque todos lo usan así
+### PASO 0: INSTALAR
+En Linux y en WSL se debe instalar para ejecutar ambientes virtuales, no es necesario en python de Mac y Windows
+$ apt install -y python3-venv
 
-$ py -m venv venv
 
-// Después de crearlo, hay que activarlo con los siguientes comandos
+### PASO 1: CREAR EL AMBIENTE
+para crear el entorno virtual en una carpeta especifica,
+posicionare en esa carpeta y luego escribe en consola
+$ py -m venv [nombreCarpetaDondeSeDuplicaPython] : se van a crear carpetas con el entorno
+$ py -m venv venv : se van a crear carpetas con el entorno
 
-$ source venv/bin/activate          // para Linux y mac
-$ .\venv\Scripts\activate           // Usando W10 con Cmder o equivalentes
-$ source ./venv/Scripts/activate    // para w10 usando bash o equivalentes
+-m : modulo
+venv : Virtual environment
 
-// para salir del entorno virtual
+después que se crea, hay que activarlo
 
+
+### PASO 2: ACTIVARLO
+después de crear el ambiente, hay que activarlo con los siguientes comandos 
+
+$ source [nombreDeLaCarpeteAmbiente]/bin/activate : para Linux y mac
+$ source venv/bin/activate : para Linux y mac
+$ .\venv\Scripts\activate : Usando W10 con Cmder
+$ source ./venv/Scripts/activate : para w10 usando bash
+
+
+### PASO 3: LISTO
+puedes usar el ambiente
+
+
+### PASO 4: SALIR
+para salir del entorno virtual
 $ deactivate
 
 
-## Opcionales
-//para crear alias
 
-// para ahorrarse escritura en la activación y solo escribir "avenv"
+### OPCIONALES: Crear un alias
 
 $ alias avenv=.\venv\Scripts\activate
-$ avenv // se activa el modo de Virtual Environment
+$avenv : se activa el modo de Virtual Environment
 
-// para ver todas las dependencias o módulos instalados en el entorno virtual
-$ pip freeze 
+pip freeze : para ver todas las dependencias o módulos instalados en el entorno virtual
 
-// Para instalar librerías
-$ pip install [nombre de la librería]
-$ pip install pandas
+pip install pandas
 
-// Para guardar las dependencias y que otra persona pueda instalarlas y usarlas igual
-pip freeze > requirements.txt 
+pip freeze > requirements.txt : para guardar las dependencias y que otra persona pueda instalarlas y usarlas igual
 
-// Para instalar todas las dependencias de otra persona
-pip install -r requirements.txt
+pip install -r requirements.txt : para instalar todas las dependencias
+
+
+## COMANDOS PARA COMPILAR A C EN WINDOWS
+debe haber un archivo setup.py para que contenga las instrucciones del archivo a compilar
+$ python setup.py build_ext --inplace

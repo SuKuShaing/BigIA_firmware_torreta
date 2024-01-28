@@ -2,9 +2,11 @@
 venv
 FrontEnd_py/__pycache__
 __pycache__
+build
 
 #Archivos intermedios
 FrontEnd_py/static/css/style.css.map
+motores.cp312-win_amd64.pyd
 
 #Archivo del seba
 Seba_en_que_vas.txt
