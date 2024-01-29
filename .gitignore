@@ -8,6 +8,9 @@ build
 FrontEnd_py/static/css/style.css.map
 motores.cp312-win_amd64.pyd
 
+# omitir archivos html dentro de la carpeta m_cython
+FrontEnd_py/m_cython/*.html
+
 #Archivo del seba
 Seba_en_que_vas.txt
 

@@ -60,6 +60,21 @@ pip freeze > requirements.txt : para guardar las dependencias y que otra persona
 pip install -r requirements.txt : para instalar todas las dependencias
 
 
-## COMANDOS PARA COMPILAR A C EN WINDOWS
-debe haber un archivo setup.py para que contenga las instrucciones del archivo a compilar
+
+## COMANDOS PARA COMPILAR A C
+Debe haber un archivo setup.py para que contenga las instrucciones del archivo a compilar y se debe instalar un compilador
+en Windows al parecer basta con tener instalado Visual Studio (no confundir con VSC), en Linux se instala la linea el compilador build-essential
+
+### En windows
+$ pip install cython
+
+
+Se puede escribir y optimizar el código en Windows, pero se debe compilar en la plataforma a usar, en este caso Linux, puesto que el archivo compilado es diferente, para windows produce un .pyd y para Linux un .so
+
+### En Linux
+$ pip install cython
+$ sudo apt-get install build-essential
+
+### Compilar 
+En ambos sistemas operativos se ocupa el mismo comando
 $ python setup.py build_ext --inplace
