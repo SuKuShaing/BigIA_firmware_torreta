@@ -65,11 +65,10 @@ pip install -r requirements.txt : para instalar todas las dependencias
 Debe haber un archivo setup.py para que contenga las instrucciones del archivo a compilar y se debe instalar un compilador
 en Windows al parecer basta con tener instalado Visual Studio (no confundir con VSC), en Linux se instala la linea el compilador build-essential
 
+Se puede escribir y optimizar el código en Windows, pero se debe compilar en la plataforma a usar, en este caso Linux, puesto que el archivo compilado es diferente, para windows produce un .pyd y para Linux un .so
+
 ### En windows
 $ pip install cython
-
-
-Se puede escribir y optimizar el código en Windows, pero se debe compilar en la plataforma a usar, en este caso Linux, puesto que el archivo compilado es diferente, para windows produce un .pyd y para Linux un .so
 
 ### En Linux
 $ pip install cython

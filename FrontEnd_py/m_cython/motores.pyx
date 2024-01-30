@@ -1,6 +1,7 @@
 import time
 # from time import sleep
-from libc.time cimport usleep
+# from libc.time cimport usleep
+from libc.time cimport nanosleep, timespec, clock_gettime, CLOCK_REALTIME
 import RPi.GPIO as GPIO
 import queue
 import threading
@@ -20,7 +21,7 @@ cdef class Stepper():
         self.angulo = None
         self.id = id
         self.ROT = 1  # default CW (sentido de giro por defecto, en el sentido de las agujas del reloj)
-        self.delay = 0.001 * 1000000 # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
+        self.delay = 0.001 * 1000000000 # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
 
         # Configuración de los pines DIR (dirección) y STEP (paso) según el ID del motor
         if id == 1:
@@ -45,9 +46,9 @@ cdef class Stepper():
         # Genera el número de pasos especificados
         for x in range(pasos):
             GPIO.output(self.STEP, GPIO.HIGH)  # Prende
-            usleep(self.delay)  # Espera el tiempo definido
+            nanosleep(self.delay)  # Espera el tiempo definido
             GPIO.output(self.STEP, GPIO.LOW)  # apaga
-            usleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
+            nanosleep(self.delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
 
 
     cpdef mover_stepper_debug(self, str sentido, int pasos, double delay=0.01): # Tiempo de retardo para el motor (puedes ajustarlo según sea necesario) | valor que dejó Felipe 0.0000608 / 32 | debiese ser 0.010 seg 0 10 ms  | lo mínimo que el DVR8825 es de 1,9 ms
@@ -68,9 +69,9 @@ cdef class Stepper():
 
         for paso in range(pasos):
             GPIO.output(self.STEP, GPIO.HIGH)  # Prende 
-            usleep(delay)  # Espera el tiempo definido
+            nanosleep(delay)  # Espera el tiempo definido
             GPIO.output(self.STEP, GPIO.LOW)  # apaga
-            usleep(delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
+            nanosleep(delay) # TODO: podría ser diferente, Espera el tiempo definido que es el mismos que el de prendido
             # cada 100 pasos el if se cumple
             if paso % 100 == 0:
                 print(f"Estoy en tools_web, en el paso: {paso} y delay: {delay}")
@@ -80,8 +81,8 @@ cdef class Stepper():
         print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
 
     cpdef mover_stepper_suave(self, str sentido, int pasos):
-            cdef double initial_delay = 0.0001 * 1000000
-            cdef double final_delay = 0.0000608 * 1000000
+            cdef double initial_delay = 0.0001 * 1000000000
+            cdef double final_delay = 0.0000608 * 1000000000
             cdef double acceleration_factor, current_delay
             cdef int paso
 
@@ -99,23 +100,23 @@ cdef class Stepper():
                 # current_delay = final_delay + (initial_delay - final_delay) * acceleration_factor # para el frenado 
 
                 GPIO.output(self.STEP, GPIO.HIGH)
-                usleep(current_delay)
+                nanosleep(current_delay)
                 GPIO.output(self.STEP, GPIO.LOW)
-                usleep(current_delay)
+                nanosleep(current_delay)
 
     cpdef mover_infinito(self, object cola):
         cdef int pasos_que_llevo = 0
         cdef int pasos_que_llevo_maximos = int((45/360)*200*1)
         cdef int pasos_a_ejecutar = 0
         cdef list datos = []
-        cdef double delay_inicial = 0.01 * 1000000
-        cdef double delay_final = 0.0001 * 1000000
+        cdef double delay_inicial = 0.01 * 1000000000
+        cdef double delay_final = 0.0001 * 1000000000
         cdef double start_time, elapsed_time, acceleration_factor, current_delay
 
 
         print(f"Inicie el thread del motor {self.id}")
         while True:
-            start_time = time.time()
+            start_time = current_time()
 
             if not cola.empty():
                 for i in range(cola.qsize()):
@@ -163,17 +164,17 @@ cdef class Stepper():
                         # current_delay = delay_final + (delay_inicial - delay_final) * acceleration_factor # para el acelerado 
 
                         GPIO.output(self.STEP, GPIO.HIGH)
-                        usleep(current_delay)
+                        nanosleep(current_delay)
                         GPIO.output(self.STEP, GPIO.LOW)
-                        usleep(current_delay)
+                        nanosleep(current_delay)
 
                         pasos_que_llevo += 1
                     else:
                         # modo velocidad constante
                         GPIO.output(self.STEP, GPIO.HIGH)
-                        usleep(delay_final)
+                        nanosleep(delay_final)
                         GPIO.output(self.STEP, GPIO.LOW)
-                        usleep(delay_final)
+                        nanosleep(delay_final)
                 else:
                     # modo frenado
                     acceleration_factor = pasos_que_llevo / pasos_que_llevo_maximos  # Ajuste de aceleración gradual, "pasos" en cuantos pasos va a hacer la aceleración y llegar al máximo de velocidad
@@ -181,9 +182,9 @@ cdef class Stepper():
                     current_delay = (delay_inicial - delay_final) * (1 - acceleration_factor) + delay_final # para el frenado
                     
                     GPIO.output(self.STEP, GPIO.HIGH)
-                    usleep(current_delay)
+                    nanosleep(current_delay)
                     GPIO.output(self.STEP, GPIO.LOW)
-                    usleep(current_delay)
+                    nanosleep(current_delay)
 
                     pasos_que_llevo -= 1
                     pasos_que_llevo = max(0, pasos_que_llevo)
@@ -191,9 +192,15 @@ cdef class Stepper():
                 pasos_a_ejecutar -= 1
                 pasos_a_ejecutar = max(0, pasos_a_ejecutar)
 
-                elapsed_time = time.time() - start_time
+                elapsed_time = current_time() - start_time
+                # elapsed_time = time.time() - start_time
                 print(f"Tiempo de ejecución de la función mover_stepper_debug: {elapsed_time} segundos")
 
+
+cdef double current_time():
+    cdef timespec t
+    clock_gettime(CLOCK_REALTIME, &t)
+    return t.tv_sec + t.tv_nsec / 1e9
 
 #######################################################
 ############## Declaración de Variables ###############
