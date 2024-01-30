@@ -8,6 +8,7 @@ sys.path.append(PROJECT_ROOT)
 # import backend.Python.torreta_v05_funcional as tf
 #Más información sobre como importar bien en https://towardsdatascience.com/understanding-python-imports-init-py-and-pythonpath-once-and-for-all-4c5249ab6355
 import torr_v2_web as tf
+import laserYDisparo as lyd
 
 
 app = Flask(__name__, template_folder='templates')
@@ -59,8 +60,20 @@ def aumento(au):
 @socketio.on('pyt')
 def fuego():
     print("¡Fire!")
-    tf.disparar()
+    lyd.disparar()
     emit('disparo', "Disparo ejecutado") #emit es solo entre el usuario y el servidor, independiente de cuantos hay conectados
+
+
+@socketio.on('lon')
+def laser_on():
+    print("Prendí el laser")
+    lyd.prender_laser()
+
+
+@socketio.on('lon')
+def laser_on():
+    print("Apagué el laser")
+    lyd.apagar_laser()
 
 
 

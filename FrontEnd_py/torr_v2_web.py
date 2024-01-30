@@ -47,8 +47,6 @@ STEP2 = 26
 CW2 = 1      
 CCW2 = 0     
 
-# Disparador
-SHOT = 25
 MODE1 = (14, 15, 18) # Mode 0, Mode 1, Mode 2
 MODE2 = (17, 27, 22)  # Mode 0, Mode 1, Mode 2
 
@@ -60,7 +58,6 @@ GPIO.output(DIR1, CW1)
 GPIO.setup(DIR2, GPIO.OUT)
 GPIO.setup(STEP2, GPIO.OUT)
 GPIO.output(DIR2, CW2)
-GPIO.setup(SHOT, GPIO.OUT)
 GPIO.setup(MODE1, GPIO.OUT)
 GPIO.setup(MODE2, GPIO.OUT)
 GPIO.output(MODE1, (0, 0, 0)) # De aquí se regula el microstepping
@@ -135,19 +132,6 @@ def dis_vel_mov():
         print(f'Pasos por click o incremento es de: {incremento}')
     else:
         print('Pasos por click o incremento llegaría a cero, Explorar que pasa en esta situación')
-
-
-# Esto se puede colocar en otra hoja
-def disparar():
-    GPIO.output(SHOT, 1)
-    sleep(0.1)
-    GPIO.output(SHOT, 0)
-    print("Disparo")
-
-
-def laser():
-    #colocar lógica del láser aquí
-    pass
 
 
 # def apagar_camara():

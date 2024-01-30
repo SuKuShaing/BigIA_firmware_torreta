@@ -9,5 +9,6 @@
 -- 120000/60 = 2000 pasos por segundo (velocidad maxima, este valor cambia sí las RPM maximas cambian y los pasos del motor)
 
 ✔ Hacer el requierements.txt
--> (aquí voy) optimizar el código para cytonize
+✔ optimizar el código para cytonize
+- Hacer los botones del laser en la web
 - Hacer que se vea bien en celulares puesto que se desplaza hacia abajo por la barra de dirección
