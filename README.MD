@@ -6,13 +6,16 @@ Se lleva a cabo el desarrollo de la torreta automatica de defensa
 ### Permisos
 Para solicitar permisos, avisar a Seba :D
 
+
 ## Crear y ejecutar un entorno virtual
 Siempre es importante trabajar dentro de un entorno, puesto que así evitamos que se contaminen las librerías que usamos en cada proyecto, con las librerías de otros proyectos.
 Seguir estos pasos en órden, el símbolo "$" indica que lo que sigue se debe pegar en la consola
 
 ### PASO 0: INSTALAR
 En Linux y en WSL se debe instalar para ejecutar ambientes virtuales, no es necesario en python de Mac y Windows
+
 $ apt install -y python3-venv
+
 
 
 ### PASO 1: CREAR EL AMBIENTE
@@ -42,12 +45,12 @@ puedes usar el ambiente
 
 ### PASO 4: SALIR
 para salir del entorno virtual
+
 $ deactivate
 
 
 
 ### OPCIONALES: Crear un alias
-
 $ alias avenv=.\venv\Scripts\activate
 $avenv : se activa el modo de Virtual Environment
 
