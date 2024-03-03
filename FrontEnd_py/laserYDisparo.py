@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 # Pines
-SHOT = 25
-LASER = 100 # colocar el pin real del láser aquí
+SHOT = 24
+LASER = 23 # colocar el pin real del láser aquí
 
 GPIO.setup(SHOT, GPIO.OUT)
 GPIO.setup(LASER, GPIO.OUT)
